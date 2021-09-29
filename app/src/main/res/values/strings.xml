@@ -7,6 +7,8 @@
     <string name="edt_mail">Nombre de usuario</string>
     <string name="edt_password">Contraseña</string>
 
+    <string name="itm_about">Acerca de</string>
+    <string name="itm_exit">Cerrar sesión</string>
     <string name="fab">Agregar orden</string>
 
     <string name="tbaddorder">Agregar orden</string>
