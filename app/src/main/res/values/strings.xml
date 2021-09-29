@@ -7,16 +7,8 @@
     <string name="edt_mail">Nombre de usuario</string>
     <string name="edt_password">Contraseña</string>
 
-    <string name="tbmenu">Menú principal</string>
     <string name="fab">Agregar orden</string>
 
     <string name="tbaddorder">Agregar orden</string>
     <string name="til_selmesa">Seleccione una mesa</string>
-    <string-array name="languages">
-        <item>C</item>
-        <item>C++</item>
-        <item>Java</item>
-        <item>JavaScript</item>
-        <item>VisualBasic</item>
-    </string-array>
 </resources>

@@ -22,14 +22,14 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/red"
-            app:statusBarScrim="@color/red"
+            app:statusBarScrim="@color/ic_index_background"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/back"
+                android:src="@drawable/back2"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 android:contentDescription="@string/app_name"/>
@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="@string/tbmenu"
-                app:titleTextColor="@color/red"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/white"
                 app:popupTheme="@style/Theme.SpeedyPizza.PopupOverlay" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
