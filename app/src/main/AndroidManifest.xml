@@ -10,8 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyPizza">
         <activity
+            android:name=".AboutOfActivity"
+            android:exported="true"
+            android:label="@string/itm_about"
+            android:screenOrientation="portrait"
+            android:theme="@style/SeeActionBar"/>
+        <activity
             android:name=".AddOrderActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainContentActivity"
             android:exported="true" />

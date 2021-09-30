@@ -1,16 +1,26 @@
 <resources>
     <string name="app_name">Speedy Pizza</string>
-    <string name="tv_version">Versión 1.0</string>
-    <string name="tv_derechos">© 2021 Todos los derechos reservados</string>
 
+    //Login
     <string name="btn_login">Iniciar Sesión</string>
     <string name="edt_mail">Nombre de usuario</string>
     <string name="edt_password">Contraseña</string>
 
+    //Inicio
     <string name="itm_about">Acerca de</string>
     <string name="itm_exit">Cerrar sesión</string>
     <string name="fab">Agregar orden</string>
 
+    //Agregar orden
     <string name="tbaddorder">Agregar orden</string>
     <string name="til_selmesa">Seleccione una mesa</string>
+
+    //Acerca de
+    <string name="tv_desarrolladores">Desarrolladores</string>
+    <string name="tv_dv1">-> Juan Carlos Molina Chamel</string>
+    <string name="tv_dv2">-> Carlhos Edgardo Figueroa Tejada</string>
+    <string name="tv_dv3">-> Daniel Fernando Cuellar Larín</string>
+    <string name="tv_dv4">-> José Francisco Hernández Reyes</string>
+    <string name="tv_version">Versión 1.0</string>
+    <string name="tv_derechos">© 2021 Speedy Pizza</string>
 </resources>

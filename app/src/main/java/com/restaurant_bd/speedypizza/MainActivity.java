@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.itm_about) {
-            startActivity(new Intent(MainActivity.this, AddOrderActivity.class));
+            startActivity(new Intent(MainActivity.this, AboutOfActivity.class));
         }else{
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
