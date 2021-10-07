@@ -4,35 +4,35 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@mipmap/ic_index"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_index_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyPizza">
         <activity
+            android:name=".MenuActivity"
+            android:exported="true" />
+        <activity
             android:name=".AboutOfActivity"
             android:exported="true"
             android:label="@string/itm_about"
-            android:screenOrientation="portrait"
-            android:theme="@style/SeeActionBar"/>
+            android:theme="@style/SeeActionBar" />
         <activity
             android:name=".AddOrderActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:exported="true" />
         <activity
             android:name=".MainContentActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

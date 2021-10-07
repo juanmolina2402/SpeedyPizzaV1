@@ -14,6 +14,10 @@
     //Agregar orden
     <string name="tbaddorder">Agregar orden</string>
     <string name="til_selmesa">Seleccione una mesa</string>
+    <string name="btn_agregar">Agregar</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="tv_total">Total: $</string>
+    <string name="tv_totaln">0.00</string>
 
     //Acerca de
     <string name="tv_desarrolladores">Desarrolladores</string>
