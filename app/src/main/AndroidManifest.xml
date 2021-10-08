@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.restaurant_bd.speedypizza">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:fullBackupOnly="true"
@@ -10,6 +12,11 @@
         android:roundIcon="@mipmap/ic_index_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyPizza">
+        <activity
+            android:name=".CategoryActivity"
+            android:exported="true"
+            android:label="@string/itm_category"
+            android:theme="@style/SeeActionBar" />
         <activity
             android:name=".MenuActivity"
             android:exported="true" />

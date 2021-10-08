@@ -19,6 +19,9 @@
     <string name="tv_total">Total: $</string>
     <string name="tv_totaln">0.00</string>
 
+    //Categorias
+    <string name="itm_category">Seleccione categoría</string>
+
     //Acerca de
     <string name="tv_desarrolladores">Desarrolladores</string>
     <string name="tv_dv1">-> Juan Carlos Molina Chamel</string>
