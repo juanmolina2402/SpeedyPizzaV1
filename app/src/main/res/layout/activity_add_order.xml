@@ -6,14 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".AddOrderActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        app:title="@string/tbaddorder"
+        app:titleTextColor="@color/white"
+        android:minHeight="?attr/actionBarSize"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
         app:startIconDrawable="@drawable/tables"
         app:startIconTint="@color/orange"
         android:hint="@string/til_selmesa"
@@ -58,6 +68,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:gravity="end"
         android:orientation="horizontal">
 
@@ -68,7 +79,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="end"
-            android:textSize="20dp"/>
+            android:textSize="25dp"/>
 
         <TextView
             android:id="@+id/tv_total"
@@ -77,7 +88,7 @@
             android:text="@string/tv_totaln"
             android:textColor="@color/black"
             android:gravity="end"
-            android:textSize="20dp"/>
+            android:textSize="25dp"/>
     </LinearLayout>
 
     <include layout="@layout/activity_main_content"/>

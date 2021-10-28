@@ -7,5 +7,4 @@
         android:bottom="210dp">
         <bitmap android:src="@drawable/dv"/>
     </item>
-    <text>a</text>
 </layer-list>
