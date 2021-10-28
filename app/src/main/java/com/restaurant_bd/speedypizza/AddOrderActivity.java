@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.restaurant_bd.speedypizza.interfaces.MesaService;
 import com.restaurant_bd.speedypizza.model.Mesa;
@@ -63,12 +64,12 @@ public class AddOrderActivity extends AppCompatActivity {
             }
         });
 
-        Button btnAgregar  = findViewById(R.id.btn_agregar);
+        ImageView btnAgregar  = findViewById(R.id.btn_agregar);
         btnAgregar.setOnClickListener(v -> {
             startActivity(new Intent(AddOrderActivity.this, CategoryActivity.class));
         });
 
-        Button btnAceptar  = findViewById(R.id.btn_aceptar);
+        ImageView btnAceptar  = findViewById(R.id.btn_aceptar);
         btnAceptar.setOnClickListener(v -> {
             finish();
         });

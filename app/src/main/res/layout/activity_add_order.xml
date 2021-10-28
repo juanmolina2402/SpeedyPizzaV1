@@ -27,41 +27,54 @@
         app:startIconDrawable="@drawable/tables"
         app:startIconTint="@color/orange"
         android:hint="@string/til_selmesa"
+        android:background="#0B9897"
         app:hintTextColor="@color/black">
 
         <AutoCompleteTextView
             android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"/>
+            android:inputType="none"
+            tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         android:gravity="center"
+        android:background="#0B9897"
         android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/btn_agregar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:text="@string/btn_agregar"
-            android:textAllCaps="false"
-            app:icon="@drawable/add"
-            android:backgroundTint="@color/orange"/>
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.3"
+            android:layout_marginRight="05dp"
+            android:padding="10dp"
+            android:background="#C8892C"
+            android:src="@drawable/add"/>
 
-        <Button
+        <ImageView
+            android:id="@+id/btn_clear"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.3"
+            android:layout_marginRight="05dp"
+            android:padding="10dp"
+            android:background="@color/red"
+            android:src="@drawable/clear"/>
+
+        <ImageView
             android:id="@+id/btn_aceptar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:text="@string/btn_aceptar"
-            android:textAllCaps="false"
-            app:icon="@drawable/accept"
-            android:backgroundTint="@color/green"/>
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.3"
+            android:padding="10dp"
+            android:background="#4CAF50"
+            android:src="@drawable/accept"/>
 
     </LinearLayout>
 
@@ -70,25 +83,28 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="end"
+        android:background="@color/teal_700"
+        android:padding="10dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_total"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="end"
-            android:textSize="25dp"/>
+            android:textSize="25sp"/>
 
         <TextView
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_totaln"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:gravity="end"
-            android:textSize="25dp"/>
+            android:textSize="25sp"/>
+
     </LinearLayout>
 
     <include layout="@layout/activity_main_content"/>
