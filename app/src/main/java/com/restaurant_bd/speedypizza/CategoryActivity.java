@@ -45,7 +45,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
                 if(response.isSuccessful()){
                     listaCategoria = response.body();
-                    ArrayAdapter<Categoria> adapter = new ArrayAdapter<>(CategoryActivity.this, android.R.layout.simple_list_item_1, listaCategoria);
+                    ArrayAdapter<Categoria> adapter = new ArrayAdapter<>(CategoryActivity.this, R.layout.custom_category, listaCategoria);
                     listView = findViewById(R.id.lv_categoria);
                     listView.setAdapter(adapter);
                 }

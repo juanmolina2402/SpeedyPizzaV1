@@ -12,7 +12,8 @@
         android:id="@+id/lv_categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"/>
+        android:divider="@color/white"
+        android:dividerHeight="1dp"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>
