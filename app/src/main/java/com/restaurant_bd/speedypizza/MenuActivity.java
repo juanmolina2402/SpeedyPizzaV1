@@ -3,27 +3,13 @@ package com.restaurant_bd.speedypizza;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
-import com.restaurant_bd.speedypizza.Models.Categoria;
-import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.MenuService;
 import com.restaurant_bd.speedypizza.Models.Menu;
-
-import java.util.Collections;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,13 +19,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MenuActivity extends AppCompatActivity {
     private final String baseUrl = "https://restaurant-bd.herokuapp.com/";
     private List<Menu> listaMenu;
-    EditText id;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        id = getIntent().getStringExtra("Id");
         buscar();
     }
 
@@ -50,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
                 .build();
 
         MenuService menuService = retrofit.create(MenuService.class);
-        Call<List<Menu>> lista = menuService.getMenu(1);
+        Call<List<Menu>> lista = menuService.getMenu(Integer.parseInt(id));
         lista.enqueue(new Callback<List<Menu>>() {
             @Override
             public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {

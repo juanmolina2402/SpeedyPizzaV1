@@ -19,13 +19,7 @@
             android:theme="@style/SeeActionBar" />
         <activity
             android:name=".MenuActivity"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".AboutOfActivity"
             android:exported="true"
@@ -48,7 +42,11 @@
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

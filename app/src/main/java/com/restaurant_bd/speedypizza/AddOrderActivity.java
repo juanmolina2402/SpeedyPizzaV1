@@ -51,7 +51,7 @@ public class AddOrderActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
                             mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
-                            Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getCodigo(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getId(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

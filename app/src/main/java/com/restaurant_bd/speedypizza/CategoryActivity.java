@@ -3,11 +3,18 @@ package com.restaurant_bd.speedypizza;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.CategoriaService;
 import com.restaurant_bd.speedypizza.Models.Categoria;
 import java.util.List;
@@ -47,6 +54,15 @@ public class CategoryActivity extends AppCompatActivity {
                     ArrayAdapter<Categoria> adapter = new ArrayAdapter<>(CategoryActivity.this, R.layout.custom_category, listaCategoria);
                     listView = findViewById(R.id.lv_categoria);
                     listView.setAdapter(adapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
+                            cSelected = (Categoria) arg0.getAdapter().getItem(arg2);
+                            Intent i= new Intent(CategoryActivity.this, MenuActivity.class);
+                            i.putExtra("Id", cSelected.getId().toString());
+                            startActivity(i);
+                        }
+                    });
                 }
             }
 
