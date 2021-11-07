@@ -1,4 +1,4 @@
-package com.restaurant_bd.speedypizza.model;
+package com.restaurant_bd.speedypizza.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

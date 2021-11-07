@@ -3,14 +3,13 @@ package com.restaurant_bd.speedypizza;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.restaurant_bd.speedypizza.interfaces.CategoriaService;
-import com.restaurant_bd.speedypizza.model.Categoria;
+import com.restaurant_bd.speedypizza.Services.CategoriaService;
+import com.restaurant_bd.speedypizza.Models.Categoria;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;

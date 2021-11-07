@@ -1,13 +1,9 @@
-package com.restaurant_bd.speedypizza.adapter;
+package com.restaurant_bd.speedypizza.Adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.restaurant_bd.speedypizza.R;
-import com.restaurant_bd.speedypizza.model.Menu;
+import com.restaurant_bd.speedypizza.Models.Menu;
 
 import java.util.List;
 

@@ -13,13 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.restaurant_bd.speedypizza.interfaces.MenuService;
-import com.restaurant_bd.speedypizza.model.Menu;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.restaurant_bd.speedypizza.Services.MenuService;
+import com.restaurant_bd.speedypizza.Models.Menu;
 
 import retrofit2.Call;
 import retrofit2.Callback;
