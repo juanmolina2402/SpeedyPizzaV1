@@ -1,6 +1,8 @@
 package com.restaurant_bd.speedypizza;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -13,8 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
+import com.restaurant_bd.speedypizza.Models.Categoria;
+import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.MenuService;
 import com.restaurant_bd.speedypizza.Models.Menu;
+
+import java.util.Collections;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,62 +32,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MenuActivity extends AppCompatActivity {
     private final String baseUrl = "https://restaurant-bd.herokuapp.com/";
+    private List<Menu> listaMenu;
     EditText id;
-    TextView firtname;
-    TextView lastname;
-    TextView email;
-    ImageView imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        id= (EditText) findViewById(R.id.id);
-        firtname=(TextView)findViewById(R.id.firstname);
-        lastname=(TextView)findViewById(R.id.lastname);
-        email=(TextView)findViewById(R.id.email);
-        imagen = findViewById(R.id.ivImagen);
+        buscar();
     }
 
-    public void buscar (View view)
+    public void buscar ()
     {
-        Retrofit t = new Retrofit.Builder().baseUrl(baseUrl)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MenuService api = t.create(MenuService.class);
-        Call<Menu> call= api.find(Integer.parseInt(id.getText().toString()));//QUEMADO
-        call.enqueue(new Callback<Menu>() {
+        MenuService menuService = retrofit.create(MenuService.class);
+        Call<List<Menu>> lista = menuService.getMenu(1);
+        lista.enqueue(new Callback<List<Menu>>() {
             @Override
-            public void onResponse(Call<Menu> call, Response<Menu> response) {
-
+            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
                 try {
                     if(response.isSuccessful())
                     {
-                        Menu m = response.body();
-                        firtname.setText(m.getNombre());
-                        lastname.setText(m.getDescripcion());
-                        email.setText(m.getPrecio());
-
-                        String base64String = "data:image/png;base64," + m.getImagen();
-                        String base64Image = base64String.split(",")[1];
-
-                        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-                        imagen.setImageBitmap(decodedByte);
+                        listaMenu = response.body();
+                        RecyclerView recyclerView = findViewById(R.id.rvMenu);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
+                        recyclerView.setAdapter(new MenuAdapter(listaMenu));
                     }
 
                 }catch (Exception e)
                 {
                     Toast.makeText(MenuActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
-            public void onFailure(Call<Menu> call, Throwable t) {
+            public void onFailure(Call<List<Menu>> call, Throwable t) {
 
             }
         });
