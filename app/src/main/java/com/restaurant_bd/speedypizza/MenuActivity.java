@@ -1,10 +1,13 @@
 package com.restaurant_bd.speedypizza;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Services.MenuService;
@@ -26,6 +29,11 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         id = getIntent().getStringExtra("Id");
         buscar();
     }
@@ -46,6 +54,7 @@ public class MenuActivity extends AppCompatActivity {
                     {
                         listaMenu = response.body();
                         RecyclerView recyclerView = findViewById(R.id.rvMenu);
+                        recyclerView.addItemDecoration(new DividerItemDecoration(MenuActivity.this, LinearLayoutManager.VERTICAL));
                         recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
                         recyclerView.setAdapter(new MenuAdapter(listaMenu));
                     }
@@ -61,5 +70,15 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

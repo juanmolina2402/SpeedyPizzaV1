@@ -22,6 +22,9 @@
     //Categorias
     <string name="itm_category">Seleccione categoría</string>
 
+    //Menu
+    <string name="itm_menu">Seleccione menus</string>
+
     //Acerca de
     <string name="tv_desarrolladores">Desarrolladores</string>
     <string name="tv_dv1">-> Juan Carlos Molina Chamel</string>

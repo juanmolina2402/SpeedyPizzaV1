@@ -19,7 +19,9 @@
             android:theme="@style/SeeActionBar" />
         <activity
             android:name=".MenuActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/itm_menu"
+            android:theme="@style/SeeActionBar"/>
         <activity
             android:name=".AboutOfActivity"
             android:exported="true"
