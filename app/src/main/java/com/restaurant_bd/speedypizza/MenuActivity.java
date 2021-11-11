@@ -54,7 +54,7 @@ public class MenuActivity extends AppCompatActivity {
                     {
                         listaMenu = response.body();
                         RecyclerView recyclerView = findViewById(R.id.rvMenu);
-                        recyclerView.addItemDecoration(new DividerItemDecoration(MenuActivity.this, LinearLayoutManager.VERTICAL));
+                        recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
                         recyclerView.setAdapter(new MenuAdapter(listaMenu));
                     }
