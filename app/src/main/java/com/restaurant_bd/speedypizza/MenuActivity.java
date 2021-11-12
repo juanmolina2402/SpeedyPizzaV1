@@ -2,7 +2,6 @@ package com.restaurant_bd.speedypizza;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.pm.ActivityInfo;
@@ -56,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
                         RecyclerView recyclerView = findViewById(R.id.rvMenu);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
-                        recyclerView.setAdapter(new MenuAdapter(listaMenu));
+                        recyclerView.setAdapter(new MenuAdapter(listaMenu, MenuActivity.this));
                     }
 
                 }catch (Exception e)

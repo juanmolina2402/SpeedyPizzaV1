@@ -2,7 +2,6 @@ package com.restaurant_bd.speedypizza;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;

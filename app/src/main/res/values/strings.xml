@@ -24,6 +24,9 @@
 
     //Menu
     <string name="itm_menu">Seleccione menus</string>
+    <string name="itm_cantidad">Ingrese la cantidad</string>
+    <string name="itm_cantidad2">Digite cantidad</string>
+    <string name="btnCancelar">Cancelar</string>
 
     //Acerca de
     <string name="tv_desarrolladores">Desarrolladores</string>

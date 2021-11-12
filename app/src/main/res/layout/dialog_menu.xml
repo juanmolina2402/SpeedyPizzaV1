@@ -1,0 +1,58 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/red"
+        android:scaleType="center"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="@string/itm_cantidad"/>
+
+    <EditText
+        android:id="@+id/edtCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textSize="19sp"
+        android:hint="@string/itm_cantidad2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:backgroundTint="@color/red"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:text="@string/btnCancelar"/>
+
+        <Button
+            android:id="@+id/btnAceptar"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:text="@string/btn_agregar"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,23 +8,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.restaurant_bd.speedypizza.MenuActivity;
+import com.restaurant_bd.speedypizza.MenuDialog;
 import com.restaurant_bd.speedypizza.R;
 import com.restaurant_bd.speedypizza.Models.Menu;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements MenuDialog.ProcesarCantidad{
     private List<Menu> menuList;
+    private Context context;
 
-    public MenuAdapter(List<Menu> menuList) {
+    public MenuAdapter(List<Menu> menuList, Context context) {
         this.menuList = menuList;
+        this.context = context;
     }
 
     @NonNull
@@ -46,6 +50,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         holder.tvNombre.setText(m.getNombre());
         holder.tvDescripcion.setText(m.getDescripcion());
         holder.tvPrecio.setText(m.getPrecio());
+        holder.llmenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MenuDialog(context, MenuAdapter.this);
+            }
+        });
     }
 
     @Override
@@ -53,9 +63,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         return menuList.size();
     }
 
+    @Override
+    public void ResultadoCantidad(String cantidad) {
+        Toast.makeText(context, cantidad, Toast.LENGTH_SHORT).show();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivImagen;
         TextView tvNombre,tvDescripcion, tvPrecio;
+        LinearLayout llmenu;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +79,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
+            llmenu = itemView.findViewById(R.id.llmenu);
         }
     }
 }
