@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="300dp"
     android:layout_height="wrap_content">
@@ -21,11 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="10dp"
+        android:hint="@string/itm_cantidad2"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3"
+        android:minHeight="48dp"
+        android:padding="10dp"
         android:textSize="19sp"
-        android:hint="@string/itm_cantidad2" />
+        tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,11 +42,12 @@
             android:id="@+id/btnCancelar"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="25dp"
+            android:layout_marginEnd="25dp"
             android:backgroundTint="@color/red"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:text="@string/btnCancelar"/>
+            android:text="@string/btnCancelar"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/btnAceptar"
@@ -51,7 +56,8 @@
             android:backgroundTint="@color/green"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:text="@string/btn_agregar"/>
+            android:text="@string/btn_agregar"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
