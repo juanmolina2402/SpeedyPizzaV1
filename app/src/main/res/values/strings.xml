@@ -13,6 +13,7 @@
 
     //Agregar orden
     <string name="tbaddorder">Agregar orden</string>
+    <string name="edt_cliente">Nombre de cliente</string>
     <string name="til_selmesa">Seleccione una mesa</string>
     <string name="btn_agregar">Agregar</string>
     <string name="btn_aceptar">Aceptar</string>

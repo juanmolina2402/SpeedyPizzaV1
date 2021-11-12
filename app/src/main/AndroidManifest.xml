@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyPizza">
         <activity
+            android:name=".MenuContentActivity"
+            android:exported="false" />
+        <activity
             android:name=".CategoryActivity"
             android:exported="true"
             android:label="@string/itm_category"
@@ -21,7 +24,7 @@
             android:name=".MenuActivity"
             android:exported="true"
             android:label="@string/itm_menu"
-            android:theme="@style/SeeActionBar"/>
+            android:theme="@style/SeeActionBar" />
         <activity
             android:name=".AboutOfActivity"
             android:exported="true"
@@ -30,7 +33,7 @@
         <activity
             android:name=".AddOrderActivity"
             android:exported="true"
-            android:label="@string/itm_about"/>
+            android:label="@string/itm_about" />
         <activity
             android:name=".MainContentActivity"
             android:exported="true" />

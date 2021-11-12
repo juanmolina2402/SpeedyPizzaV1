@@ -18,6 +18,25 @@
         android:minHeight="?attr/actionBarSize"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:background="#0B9897"
+        android:hint="@string/edt_cliente"
+        app:startIconDrawable="@drawable/user"
+        app:startIconTint="@color/orange"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,9 +71,10 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="0.3"
-            android:layout_marginRight="05dp"
+            android:layout_marginEnd="05dp"
             android:padding="10dp"
             android:background="#C8892C"
+            android:contentDescription="@string/btn_agregar"
             android:src="@drawable/add"/>
 
         <ImageView
@@ -62,10 +82,11 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="0.3"
-            android:layout_marginRight="05dp"
+            android:layout_marginEnd="05dp"
             android:padding="10dp"
             android:background="@color/red"
-            android:src="@drawable/clear"/>
+            android:src="@drawable/clear"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/btn_aceptar"
@@ -74,7 +95,8 @@
             android:layout_weight="0.3"
             android:padding="10dp"
             android:background="#4CAF50"
-            android:src="@drawable/accept"/>
+            android:src="@drawable/accept"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
@@ -107,6 +129,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/activity_main_content"/>
+    <include layout="@layout/activity_menu_content"/>
 
 </LinearLayout>
