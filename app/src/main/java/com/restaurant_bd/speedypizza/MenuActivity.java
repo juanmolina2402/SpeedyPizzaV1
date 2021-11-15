@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
-import com.restaurant_bd.speedypizza.Services.MenuService;
 import com.restaurant_bd.speedypizza.Models.Menu;
+import com.restaurant_bd.speedypizza.Services.APIServices;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MenuService menuService = retrofit.create(MenuService.class);
+        APIServices menuService = retrofit.create(APIServices.class);
         Call<List<Menu>> lista = menuService.getMenu(Integer.parseInt(id));
         lista.enqueue(new Callback<List<Menu>>() {
             @Override

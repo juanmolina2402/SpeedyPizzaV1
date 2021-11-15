@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.restaurant_bd.speedypizza.Services.MesaService;
+
 import com.restaurant_bd.speedypizza.Models.Mesa;
+import com.restaurant_bd.speedypizza.Services.APIServices;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +38,7 @@ public class AddOrderActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MesaService mesaService = retrofit.create(MesaService.class);
+        APIServices mesaService = retrofit.create(APIServices.class);
         Call<List<Mesa>> lista = mesaService.getMesa();
         lista.enqueue(new Callback<List<Mesa>>() {
             @Override

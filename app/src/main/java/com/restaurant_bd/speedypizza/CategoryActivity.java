@@ -3,7 +3,6 @@ package com.restaurant_bd.speedypizza;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,11 +11,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.restaurant_bd.speedypizza.Models.Mesa;
-import com.restaurant_bd.speedypizza.Services.CategoriaService;
 import com.restaurant_bd.speedypizza.Models.Categoria;
+import com.restaurant_bd.speedypizza.Services.APIServices;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +42,7 @@ public class CategoryActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        CategoriaService categoriaService = retrofit.create(CategoriaService.class);
+        APIServices categoriaService = retrofit.create(APIServices.class);
         Call<List<Categoria>> lista = categoriaService.getCategoria();
         lista.enqueue(new Callback<List<Categoria>>() {
             @Override
