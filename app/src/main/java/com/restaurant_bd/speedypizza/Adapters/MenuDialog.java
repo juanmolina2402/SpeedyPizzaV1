@@ -1,4 +1,4 @@
-package com.restaurant_bd.speedypizza;
+package com.restaurant_bd.speedypizza.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.restaurant_bd.speedypizza.R;
 
 public class MenuDialog {
 

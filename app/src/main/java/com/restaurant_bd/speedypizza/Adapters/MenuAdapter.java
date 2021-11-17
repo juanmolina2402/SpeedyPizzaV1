@@ -15,8 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.restaurant_bd.speedypizza.MenuActivity;
-import com.restaurant_bd.speedypizza.MenuDialog;
 import com.restaurant_bd.speedypizza.R;
 import com.restaurant_bd.speedypizza.Models.Menu;
 

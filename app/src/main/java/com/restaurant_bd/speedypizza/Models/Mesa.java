@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Mesa {
 
+    /*
+    @SerializedName
+    Con esta anotación le indicamos que este campo va cambiar su nombre que el que
+    viene en el objeto serializable
+    */
     @SerializedName("id")
     @Expose
     private Integer id;
