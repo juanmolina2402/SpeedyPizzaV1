@@ -76,11 +76,11 @@ public class CategoryActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         try {
             if(MenuDialog.listaTemporal.size() > 0){
-                returnIntent.putExtra("update", 1);
+                double total = MenuDialog.total;
+                returnIntent.putExtra("total", total);
                 setResult(RESULT_OK, returnIntent);
             }
         }catch (Exception e){
-            returnIntent.putExtra("update", 0);
             setResult(RESULT_CANCELED, returnIntent);
         }
         super.finish();

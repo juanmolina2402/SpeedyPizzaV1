@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class MenuDialog {
     public static ArrayList<Menu> listaTemporal;
+    public static double total = 0;
 
     public MenuDialog(Context context, long id, String nombre, String precio){
         if(listaTemporal == null){
@@ -36,7 +37,10 @@ public class MenuDialog {
         btnCancelar.setOnClickListener(view -> dialog.dismiss());
         btnAceptar.setOnClickListener(view -> {
             if(!edtCantidad.getText().toString().isEmpty()){
-                listaTemporal.add(new Menu(id, nombre, null, precio, edtCantidad.getText().toString()));
+                double p = Double.parseDouble(precio);
+                int c = Integer.parseInt(edtCantidad.getText().toString());
+                total += p * c;
+                listaTemporal.add(new Menu(id, nombre, precio, edtCantidad.getText().toString()));
                 Toast.makeText(context, "Se agregó", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }else{

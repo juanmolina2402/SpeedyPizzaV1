@@ -14,7 +14,7 @@ import com.restaurant_bd.speedypizza.R;
 
 public class OrderDialog {
 
-    public OrderDialog(Context context, long id, String nombre, String precio, String cantidad, boolean b){
+    public OrderDialog(Context context, long id, String nombre, String precio, int cantidad, boolean b){
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -33,9 +33,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         Menu m = menuList.get(position);
 
         holder.tvNombre.setText(m.getNombre());
-        holder.tvCantidad.setText(m.getImagen());
-        holder.tvPrecio.setText("$"+m.getPrecio());
-        holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getImagen(), true));
+        holder.tvCantidad.setText(m.getCantidad());
+        holder.tvPrecio.setText("$ "+m.getPrecio());
+        //holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), true));
     }
 
     @Override

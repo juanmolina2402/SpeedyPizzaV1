@@ -43,7 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         holder.ivImagen.setImageBitmap(decodedByte);
         holder.tvNombre.setText(m.getNombre());
         holder.tvDescripcion.setText(m.getDescripcion());
-        holder.tvPrecio.setText(m.getPrecio());
+        holder.tvPrecio.setText("$ " + m.getPrecio());
         holder.llmenu.setOnClickListener(view -> new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio()));
     }
 

@@ -19,6 +19,7 @@ public class Menu {
     @SerializedName("imagen")
     @Expose
     private String imagen;
+    private String cantidad;
 
     public Menu() {
     }
@@ -29,6 +30,13 @@ public class Menu {
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
+    }
+
+    public Menu(long id, String nombre, String precio, String cantidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
     }
 
     public long getId() {
@@ -69,5 +77,13 @@ public class Menu {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 }
