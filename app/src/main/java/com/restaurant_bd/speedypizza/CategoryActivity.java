@@ -2,7 +2,6 @@ package com.restaurant_bd.speedypizza;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,9 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
 import com.restaurant_bd.speedypizza.Models.Categoria;
 import com.restaurant_bd.speedypizza.Services.APIServices;
-
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +68,22 @@ public class CategoryActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        boolean b = false;
+        Intent returnIntent = new Intent();
+        try {
+            if(MenuDialog.listaTemporal.size() > 0){
+                returnIntent.putExtra("update", 1);
+                setResult(RESULT_OK, returnIntent);
+            }
+        }catch (Exception e){
+            returnIntent.putExtra("update", 0);
+            setResult(RESULT_CANCELED, returnIntent);
+        }
+        super.finish();
     }
 
     @Override

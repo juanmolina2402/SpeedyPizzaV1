@@ -12,15 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
-import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
 import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
-import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +30,7 @@ public class AddOrderActivity extends AppCompatActivity {
     private AutoCompleteTextView textView;
     private ImageView bt_aceptar;
     private RecyclerView recyclerView;
+    private int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,50 +38,7 @@ public class AddOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_order);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        boolean b = false;
-        try {
-            if(MenuDialog.listaTemporal.size() > 0){
-                b = true;
-            }
-        }catch (Exception e){
-            b = false;
-        }
-
-       recyclerView = findViewById(R.id.rvPedidos);
-        if(b){
-            listaMenu = MenuDialog.listaTemporal;
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(AddOrderActivity.this));
-            recyclerView.setAdapter(new OrderAdapter(listaMenu, AddOrderActivity.this));
-        }
-
-        ///POST
-        Mesa m = new Mesa();
-        m.setCodigo("Mesa6");
-        bt_aceptar = (ImageView) findViewById(R.id.btn_aceptar);
-        Call<Mesa> callPostMesa = MesaAdapter.getApiServiceMesa().setMesa(m);
-        callPostMesa.enqueue(new Callback<Mesa>() {
-            @Override
-            public void onResponse(Call<Mesa> call, Response<Mesa> response) {
-                if(response.isSuccessful()){
-                    Mesa m2 = response.body();
-                    bt_aceptar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(AddOrderActivity.this, "Se agrego una nueva mesa", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }else{
-                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Mesa> call, Throwable t) {
-                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
+        recyclerView = findViewById(R.id.rvPedidos);
 
         ///GET
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
@@ -104,7 +59,6 @@ public class AddOrderActivity extends AppCompatActivity {
                             mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
                             Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getId(), Toast.LENGTH_SHORT).show();
 
-
                         }
                     });
                 }else{
@@ -120,7 +74,7 @@ public class AddOrderActivity extends AppCompatActivity {
 
         ImageView btnAgregar  = findViewById(R.id.btn_agregar);
         btnAgregar.setOnClickListener(v -> {
-            startActivity(new Intent(AddOrderActivity.this, CategoryActivity.class));
+            startActivityForResult(new Intent(AddOrderActivity.this, CategoryActivity.class), REQUEST_CODE);
         });
 
         ImageView btnLimpiar  = findViewById(R.id.btn_clear);
@@ -132,5 +86,20 @@ public class AddOrderActivity extends AppCompatActivity {
         btnAceptar.setOnClickListener(v -> {
             finish();
         });*/
+    }
+
+    public void updateList(){
+        listaMenu = MenuDialog.listaTemporal;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(AddOrderActivity.this));
+        recyclerView.setAdapter(new OrderAdapter(listaMenu, AddOrderActivity.this));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            updateList();
+        }
     }
 }
