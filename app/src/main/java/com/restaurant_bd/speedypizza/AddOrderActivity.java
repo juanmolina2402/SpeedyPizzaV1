@@ -2,6 +2,8 @@ package com.restaurant_bd.speedypizza;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,8 +14,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
+import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
@@ -25,10 +28,11 @@ import retrofit2.Response;
 
 public class AddOrderActivity extends AppCompatActivity {
     private List<Mesa> listaMesa;
+    private List<Menu> listaMenu;
     private Mesa mSelected;
     private AutoCompleteTextView textView;
-    private ListView lvPedidos;
     private ImageView bt_aceptar;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,6 @@ public class AddOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_order);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        lvPedidos = (ListView)findViewById(R.id.lv_pedidos);
-        ArrayList<String> Lst= new ArrayList<String>();
         boolean b = false;
         try {
             if(MenuDialog.listaTemporal.size() > 0){
@@ -47,19 +49,12 @@ public class AddOrderActivity extends AppCompatActivity {
             b = false;
         }
 
+       recyclerView = findViewById(R.id.rvPedidos);
         if(b){
-
-            for(int i=0;i<MenuDialog.listaTemporal.size();i++)
-            {
-                String a=MenuDialog.listaTemporal.get(i).getNombre()+" / "+MenuDialog.listaTemporal.get(i).getPrecio() +" / "+MenuDialog.listaTemporal.get(i).getImagen();
-                Lst.add(a);
-            }
-
-            ArrayAdapter<Menu> adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Lst);
-            lvPedidos.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }else{
-            Toast.makeText(this, "La lista está vacía", Toast.LENGTH_LONG).show();
+            listaMenu = MenuDialog.listaTemporal;
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(AddOrderActivity.this));
+            recyclerView.setAdapter(new OrderAdapter(listaMenu, AddOrderActivity.this));
         }
 
         ///POST
@@ -126,6 +121,11 @@ public class AddOrderActivity extends AppCompatActivity {
         ImageView btnAgregar  = findViewById(R.id.btn_agregar);
         btnAgregar.setOnClickListener(v -> {
             startActivity(new Intent(AddOrderActivity.this, CategoryActivity.class));
+        });
+
+        ImageView btnLimpiar  = findViewById(R.id.btn_clear);
+        btnLimpiar.setOnClickListener(v -> {
+
         });
 
        /* ImageView btnAceptar  = findViewById(R.id.btn_aceptar);

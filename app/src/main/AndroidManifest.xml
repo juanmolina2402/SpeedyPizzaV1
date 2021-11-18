@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyPizza">
         <activity
-            android:name=".MenuContentActivity"
-            android:exported="false" />
-        <activity
             android:name=".CategoryActivity"
             android:exported="true"
             android:label="@string/itm_category"

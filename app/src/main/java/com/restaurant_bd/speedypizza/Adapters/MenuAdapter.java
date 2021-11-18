@@ -10,21 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.restaurant_bd.speedypizza.R;
 import com.restaurant_bd.speedypizza.Models.Menu;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
-    private List<Menu> menuList;
-    private Context context;
-    private String c;
+    private final List<Menu> menuList;
+    private final Context context;
 
     public MenuAdapter(List<Menu> menuList, Context context) {
         this.menuList = menuList;
@@ -50,12 +44,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         holder.tvNombre.setText(m.getNombre());
         holder.tvDescripcion.setText(m.getDescripcion());
         holder.tvPrecio.setText(m.getPrecio());
-        holder.llmenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio());
-            }
-        });
+        holder.llmenu.setOnClickListener(view -> new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio()));
     }
 
     @Override

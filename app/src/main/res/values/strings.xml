@@ -25,7 +25,7 @@
 
     //Menu
     <string name="itm_menu">Seleccione menus</string>
-    <string name="itm_dialog_title">¿Agregar producto?</string>
+    <string name="itm_dialog_title">¿Agregar menu?</string>
     <string name="itm_cantidad2">Digite cantidad</string>
     <string name="btnCancelar">Cancelar</string>
 

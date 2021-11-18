@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivEliminar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            app:srcCompat="@drawable/cancel"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/tvNombreP"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/tvPrecioP"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="$0.00"/>
+
+        <TextView
+            android:id="@+id/tvCantidadP"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="0"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="#FA9E9494"/>
+
+</LinearLayout>
