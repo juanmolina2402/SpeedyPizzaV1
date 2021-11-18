@@ -15,7 +15,16 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:text="@string/itm_cantidad"/>
+        android:text="@string/itm_dialog_title"/>
+
+    <TextView
+        android:id="@+id/tvProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/edtCantidad"

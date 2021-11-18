@@ -10,24 +10,24 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
+import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Models.Mesa;
-import com.restaurant_bd.speedypizza.Services.APIServices;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
-
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddOrderActivity extends AppCompatActivity {
     private List<Mesa> listaMesa;
     private Mesa mSelected;
     private AutoCompleteTextView textView;
-
+    private ListView lvPedidos;
     private ImageView bt_aceptar;
 
     @Override
@@ -36,6 +36,31 @@ public class AddOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_order);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        lvPedidos = (ListView)findViewById(R.id.lv_pedidos);
+        ArrayList<String> Lst= new ArrayList<String>();
+        boolean b = false;
+        try {
+            if(MenuDialog.listaTemporal.size() > 0){
+                b = true;
+            }
+        }catch (Exception e){
+            b = false;
+        }
+
+        if(b){
+
+            for(int i=0;i<MenuDialog.listaTemporal.size();i++)
+            {
+                String a=MenuDialog.listaTemporal.get(i).getNombre()+" / "+MenuDialog.listaTemporal.get(i).getPrecio() +" / "+MenuDialog.listaTemporal.get(i).getImagen();
+                Lst.add(a);
+            }
+
+            ArrayAdapter<Menu> adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Lst);
+            lvPedidos.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }else{
+            Toast.makeText(this, "La lista está vacía", Toast.LENGTH_LONG).show();
+        }
 
         ///POST
         Mesa m = new Mesa();
@@ -63,9 +88,6 @@ public class AddOrderActivity extends AppCompatActivity {
                 Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
-
 
 
         ///GET

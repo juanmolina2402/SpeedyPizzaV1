@@ -18,11 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restaurant_bd.speedypizza.R;
 import com.restaurant_bd.speedypizza.Models.Menu;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> implements MenuDialog.ProcesarCantidad{
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     private List<Menu> menuList;
     private Context context;
+    private String c;
 
     public MenuAdapter(List<Menu> menuList, Context context) {
         this.menuList = menuList;
@@ -51,7 +53,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
         holder.llmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new MenuDialog(context, MenuAdapter.this);
+                new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio());
             }
         });
     }
@@ -59,11 +61,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> im
     @Override
     public int getItemCount() {
         return menuList.size();
-    }
-
-    @Override
-    public void ResultadoCantidad(String cantidad) {
-        Toast.makeText(context, cantidad, Toast.LENGTH_SHORT).show();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
