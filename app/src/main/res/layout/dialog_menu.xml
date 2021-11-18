@@ -22,6 +22,7 @@
         android:id="@+id/tvProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="1dp"
         android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -36,7 +37,6 @@
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3"
-        android:minHeight="48dp"
         android:padding="10dp"
         android:textSize="19sp"
         tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
@@ -50,7 +50,7 @@
 
         <Button
             android:id="@+id/btnCancelar"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
             android:backgroundTint="@color/red"
@@ -61,7 +61,7 @@
 
         <Button
             android:id="@+id/btnAceptar"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
             android:textAllCaps="false"

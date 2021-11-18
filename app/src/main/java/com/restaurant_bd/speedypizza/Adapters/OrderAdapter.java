@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         holder.tvNombre.setText(m.getNombre());
         holder.tvCantidad.setText(m.getCantidad());
         holder.tvPrecio.setText("$ "+m.getPrecio());
-        //holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), true));
+        holder.llModificar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), false));
+        holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), true));
     }
 
     @Override
@@ -46,6 +48,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivEliminar;
         TextView tvNombre, tvPrecio, tvCantidad;
+        LinearLayout llModificar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +56,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
             tvNombre = itemView.findViewById(R.id.tvNombreP);
             tvPrecio = itemView.findViewById(R.id.tvPrecioP);
             tvCantidad = itemView.findViewById(R.id.tvCantidadP);
+            llModificar = itemView.findViewById(R.id.ll_Modificar);
         }
     }
 }

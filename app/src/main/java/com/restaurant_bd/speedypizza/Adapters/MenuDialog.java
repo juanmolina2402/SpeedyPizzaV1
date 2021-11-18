@@ -23,6 +23,7 @@ public class MenuDialog {
         }
 
         final Dialog dialog = new Dialog(context);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));

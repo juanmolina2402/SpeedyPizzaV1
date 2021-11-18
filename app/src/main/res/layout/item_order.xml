@@ -16,36 +16,46 @@
             android:id="@+id/ivEliminar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.15"
             app:srcCompat="@drawable/cancel"
             tools:ignore="ContentDescription"/>
 
-        <TextView
-            android:id="@+id/tvNombreP"
+        <LinearLayout
+            android:id="@+id/ll_Modificar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="@string/app_name"/>
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvPrecioP"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="$0.00"/>
+            <TextView
+                android:id="@+id/tvNombreP"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="@string/app_name"
+                tools:ignore="NestedWeights" />
 
-        <TextView
-            android:id="@+id/tvCantidadP"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="0"/>
+            <TextView
+                android:id="@+id/tvPrecioP"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="$0.00"/>
+
+            <TextView
+                android:id="@+id/tvCantidadP"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="0"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -14,9 +14,10 @@ import com.restaurant_bd.speedypizza.R;
 
 public class OrderDialog {
 
-    public OrderDialog(Context context, long id, String nombre, String precio, int cantidad, boolean b){
+    public OrderDialog(Context context, long id, String nombre, String precio, String cantidad, boolean b){
 
         final Dialog dialog = new Dialog(context);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -30,7 +31,7 @@ public class OrderDialog {
 
         if(b){
             tvTitulo.setText("¿Eliminar menu?");
-            edtCantidad.setVisibility(View.INVISIBLE);
+            edtCantidad.setVisibility(View.GONE);
             btnAceptar.setText("Eliminar");
         }else{
             tvTitulo.setText("¿Modificar cantidad?");
@@ -42,11 +43,15 @@ public class OrderDialog {
         btnCancelar.setOnClickListener(view -> dialog.dismiss());
         btnAceptar.setOnClickListener(view -> {
             if(b){
-                //listaTemporal.add(new Menu(id, nombre, null, precio, edtCantidad.getText().toString()));
                 Toast.makeText(context, "Se eliminó", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }else{
-                Toast.makeText(context, "Cantidad inválida", Toast.LENGTH_SHORT).show();
+                if(!edtCantidad.getText().toString().isEmpty()) {
+                    Toast.makeText(context, "Se modificó", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Cantidad inválida", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
