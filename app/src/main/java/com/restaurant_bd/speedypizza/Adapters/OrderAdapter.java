@@ -36,8 +36,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         holder.tvNombre.setText(m.getNombre());
         holder.tvCantidad.setText(m.getCantidad());
         holder.tvPrecio.setText("$ "+m.getPrecio());
-        holder.llModificar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), false));
-        holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), true));
+        holder.llModificar.setOnClickListener(view -> {
+            new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, false);
+        });
+        holder.ivEliminar.setOnClickListener(view -> {
+            new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, true);
+            notifyDataSetChanged();
+        });
     }
 
     @Override

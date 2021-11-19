@@ -16,6 +16,8 @@
     <string name="edt_cliente">Nombre de cliente</string>
     <string name="til_selmesa">Seleccione una mesa</string>
     <string name="btn_agregar">Agregar</string>
+    <string name="btn_modificar">Modificar</string>
+    <string name="btn_eliminar">Eliminar</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="tv_total">Total: $</string>
     <string name="tv_totaln">0.00</string>
@@ -26,6 +28,8 @@
     //Menu
     <string name="itm_menu">Seleccione menus</string>
     <string name="itm_dialog_title">¿Agregar menu?</string>
+    <string name="itm_dialog_title2">¿Eliminar menu?</string>
+    <string name="itm_dialog_title3">¿Modificar cantidad?</string>
     <string name="itm_cantidad2">Digite cantidad</string>
     <string name="btnCancelar">Cancelar</string>
 

@@ -10,11 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.restaurant_bd.speedypizza.AddOrderActivity;
 import com.restaurant_bd.speedypizza.R;
 
 public class OrderDialog {
 
-    public OrderDialog(Context context, long id, String nombre, String precio, String cantidad, boolean b){
+    public OrderDialog(Context context, long id, String nombre, String precio, String cantidad, int position, boolean b){
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().getAttributes().windowAnimations = R.style.PauseDialogAnimation;
@@ -28,21 +30,24 @@ public class OrderDialog {
         final TextView tvTitulo = dialog.findViewById(R.id.tvTitleDialog);
         Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
         Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+        Double total = MenuDialog.total;
 
         if(b){
-            tvTitulo.setText("¿Eliminar menu?");
+            tvTitulo.setText(R.string.itm_dialog_title2);
             edtCantidad.setVisibility(View.GONE);
-            btnAceptar.setText("Eliminar");
+            btnAceptar.setText(R.string.btn_eliminar);
         }else{
-            tvTitulo.setText("¿Modificar cantidad?");
+            tvTitulo.setText(R.string.itm_dialog_title3);
             edtCantidad.setText(cantidad);
-            btnAceptar.setText("Modificar");
+            btnAceptar.setText(R.string.btn_modificar);
         }
         tvProducto.setText(nombre);
 
         btnCancelar.setOnClickListener(view -> dialog.dismiss());
         btnAceptar.setOnClickListener(view -> {
             if(b){
+                MenuDialog.total = total - (Double.parseDouble(precio) * Integer.parseInt(cantidad));;
+                MenuDialog.listaTemporal.remove(position);
                 Toast.makeText(context, "Se eliminó", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }else{
