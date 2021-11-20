@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.R;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MenuDialog {
@@ -40,9 +42,11 @@ public class MenuDialog {
             if(!edtCantidad.getText().toString().isEmpty()){
                 double p = Double.parseDouble(precio);
                 int c = Integer.parseInt(edtCantidad.getText().toString());
-                total += p * c;
+                DecimalFormat f = new DecimalFormat("#.00");
+                String t = f.format(p * c);
+                total += Double.parseDouble(t);
                 listaTemporal.add(new Menu(id, nombre, precio, edtCantidad.getText().toString()));
-                Toast.makeText(context, "Se agregó", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Agregado", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }else{
                 Toast.makeText(context, "Cantidad inválida", Toast.LENGTH_SHORT).show();

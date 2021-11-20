@@ -41,7 +41,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         });
         holder.ivEliminar.setOnClickListener(view -> {
             new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, true);
-            notifyDataSetChanged();
         });
     }
 

@@ -13,9 +13,9 @@ public class Mesa {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("codigo")
+    @SerializedName("numero")
     @Expose
-    private String codigo;
+    private String numero;
 
     public Integer getId() {
         return id;
@@ -26,15 +26,15 @@ public class Mesa {
     }
 
     public String getCodigo() {
-        return codigo;
+        return numero;
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.numero = codigo;
     }
 
     @Override
     public String toString(){
-        return codigo;
+        return numero;
     }
 }

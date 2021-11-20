@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
 import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
+import com.restaurant_bd.speedypizza.Adapters.OrderDialog;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
@@ -23,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddOrderActivity extends AppCompatActivity {
+public class AddOrderActivity extends AppCompatActivity implements OrderDialog.RefreshList{
     private List<Mesa> listaMesa;
     private List<Menu> listaMenu;
     private Mesa mSelected;
@@ -88,13 +89,17 @@ public class AddOrderActivity extends AppCompatActivity {
         });*/
     }
 
-    public void updateList(){
+    public void loadData(){
         listaMenu = MenuDialog.listaTemporal;
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(AddOrderActivity.this));
-        recyclerView.setAdapter(new OrderAdapter(listaMenu, AddOrderActivity.this));
         String total = String.valueOf(MenuDialog.total);
         tvTotal.setText(total);
+    }
+
+    public void updateList(){
+        loadData();
+        OrderAdapter adapter = new OrderAdapter(this.listaMenu, AddOrderActivity.this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -110,5 +115,12 @@ public class AddOrderActivity extends AppCompatActivity {
         MenuDialog.listaTemporal = new ArrayList<>();
         MenuDialog.total = 0;
         super.finish();
+    }
+
+    @Override
+    public void result(boolean r) {
+        if(r){
+            updateList();
+        }
     }
 }
