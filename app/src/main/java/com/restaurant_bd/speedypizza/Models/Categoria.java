@@ -1,10 +1,11 @@
 package com.restaurant_bd.speedypizza.Models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Categoria {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -28,6 +29,7 @@ public class Categoria {
         this.categoria = categoria;
     }
 
+    @NonNull
     @Override
     public String toString(){
         return categoria;

@@ -1,10 +1,11 @@
 package com.restaurant_bd.speedypizza.Models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Mesa {
-
     /*
     @SerializedName
     Con esta anotación le indicamos que este campo va cambiar su nombre que el que
@@ -33,6 +34,7 @@ public class Mesa {
         this.numero = codigo;
     }
 
+    @NonNull
     @Override
     public String toString(){
         return numero;

@@ -1,9 +1,6 @@
 package com.restaurant_bd.speedypizza;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,7 +9,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderDialog;
 import com.restaurant_bd.speedypizza.Models.Menu;
@@ -28,9 +29,9 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
     private List<Mesa> listaMesa;
     private List<Menu> listaMenu;
     private Mesa mSelected;
-    private AutoCompleteTextView textView;
+    private AutoCompleteTextView tvMesa;
     private ImageView bt_aceptar;
-    private RecyclerView recyclerView;
+    private RecyclerView rvPedidos;
     private TextView tvTotal;
 
     @Override
@@ -40,36 +41,10 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         tvTotal = findViewById(R.id.tv_total);
-        recyclerView = findViewById(R.id.rvPedidos);
+        rvPedidos = findViewById(R.id.rvPedidos);
 
-        ///GET
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
-        callMesa.enqueue(new Callback<List<Mesa>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Mesa>> call, @NonNull Response<List<Mesa>> response) {
-                if(response.isSuccessful()){
-                    ///Obtenemos la respuesta del servidor
-                    listaMesa = response.body();
-                    ArrayAdapter<Mesa> adapter = new ArrayAdapter<>(AddOrderActivity.this, android.R.layout.simple_dropdown_item_1line, listaMesa);
-                    textView = findViewById(R.id.menu);
-                    textView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-
-                    textView.setOnItemClickListener((arg0, arg1, arg2, arg3) -> {
-                        mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
-                        Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getId(), Toast.LENGTH_SHORT).show();
-
-                    });
-                }else{
-                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Mesa>> call, @NonNull Throwable t) {
-                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        callMesa.enqueue(getMesasCallback);
 
         ImageView btnAgregar  = findViewById(R.id.btn_agregar);
         btnAgregar.setOnClickListener(v ->
@@ -78,8 +53,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
 
         ImageView btnLimpiar  = findViewById(R.id.btn_clear);
         btnLimpiar.setOnClickListener(v -> {
-            MenuDialog.listaTemporal = new ArrayList<>();
-            MenuDialog.total = 0;
+            clear();
             updateList();
         });
 
@@ -89,20 +63,45 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         });*/
     }
 
-    public void loadData(){
-        listaMenu = MenuDialog.listaTemporal;
-        String total = String.valueOf(MenuDialog.total);
-        tvTotal.setText(total);
+    private final Callback<List<Mesa>> getMesasCallback = new Callback<List<Mesa>>() {
+        @Override
+        public void onResponse(@NonNull Call<List<Mesa>> call, Response<List<Mesa>> response) {
+            if(response.isSuccessful()){
+                listaMesa = response.body();
+                ArrayAdapter<Mesa> adapter = new ArrayAdapter<>(AddOrderActivity.this, android.R.layout.simple_dropdown_item_1line, listaMesa);
+                tvMesa = findViewById(R.id.menu);
+                tvMesa.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+                tvMesa.setOnItemClickListener((arg0, arg1, arg2, arg3) -> {
+                    mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
+                    Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getId(), Toast.LENGTH_SHORT).show();
+                });
+            }else{
+                Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        public void onFailure(@NonNull Call<List<Mesa>> call, @NonNull Throwable t) {
+            Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    };
+
+    private void loadData(){ //ASIGNAR DATOS DE LA LISTA TEMPORAL
+        listaMenu = listaTemporal;
+        tvTotal.setText(String.valueOf(MenuAdapter.total));
     }
 
-    public void updateList(){
+    private void updateList(){ //ACTUALIZAR RECYCLERVIEW
         loadData();
         OrderAdapter adapter = new OrderAdapter(this.listaMenu, AddOrderActivity.this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        rvPedidos.setLayoutManager(new LinearLayoutManager(this));
+        rvPedidos.hasFixedSize();
+        rvPedidos.setAdapter(adapter);
     }
 
-    @Override
+    @Override //ESPERAMOS RESPUESTA DEL ACTIVITY CATEGORIA PARA ACTUALIZAR
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
@@ -110,17 +109,21 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         }
     }
 
-    @Override
-    public void finish() {
-        MenuDialog.listaTemporal = new ArrayList<>();
-        MenuDialog.total = 0;
-        super.finish();
-    }
-
-    @Override
+    @Override //ACTUALIZAR RECYCLERVIEW SI SE HIZO UNA MODIFICACION O ELIMINACION DE LA LISTA TEMPORAL
     public void result(boolean r) {
         if(r){
             updateList();
         }
+    }
+
+    private void clear(){ //RESTABLECER VALORES
+        listaTemporal = new ArrayList<>();
+        MenuAdapter.total = 0;
+    }
+
+    @Override
+    public void finish() { //AL SALIR, ME RESETEE TODOS LOS VALORES
+        clear();
+        super.finish();
     }
 }

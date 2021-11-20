@@ -14,11 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.restaurant_bd.speedypizza.R;
 import com.restaurant_bd.speedypizza.Models.Menu;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     private final List<Menu> menuList;
     private final Context context;
+    public static ArrayList<Menu> listaTemporal;
+    public static double total = 0;
 
     public MenuAdapter(List<Menu> menuList, Context context) {
         this.menuList = menuList;
@@ -30,26 +33,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_menu, parent, false);
         return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Menu m = menuList.get(position);
-
-        String base64String = "data:image/png;base64," + m.getImagen();
-        String base64Image = base64String.split(",")[1];
-        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        holder.ivImagen.setImageBitmap(decodedByte);
-        holder.tvNombre.setText(m.getNombre());
-        holder.tvDescripcion.setText(m.getDescripcion());
-        holder.tvPrecio.setText("$ " + m.getPrecio());
-        holder.llmenu.setOnClickListener(view -> new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio()));
-    }
-
-    @Override
-    public int getItemCount() {
-        return menuList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -65,5 +48,29 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             llmenu = itemView.findViewById(R.id.llmenu);
         }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Menu m = menuList.get(position);
+        String p = "$" + m.getPrecio();
+
+        holder.ivImagen.setImageBitmap(convertImage(m.getImagen()));
+        holder.tvNombre.setText(m.getNombre());
+        holder.tvDescripcion.setText(m.getDescripcion());
+        holder.tvPrecio.setText(p);
+        holder.llmenu.setOnClickListener(view -> new MenuDialog(context, m.getId(), m.getNombre(), m.getPrecio()));
+    }
+
+    @Override
+    public int getItemCount() {
+        return menuList.size();
+    }
+
+    private Bitmap convertImage(String imagen){
+        String base64String = "data:image/png;base64," + imagen;
+        String base64Image = base64String.split(",")[1];
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="32dp">
+            android:padding="28dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -29,8 +29,8 @@
                 android:text="@string/tv_desarrolladores"
                 android:textAlignment="center"
                 android:textColor="@color/teal_700"
-                android:textStyle="bold"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="200dp"
@@ -47,8 +47,8 @@
                 android:padding="10dp"
                 android:text="@string/tv_dv1"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -59,8 +59,8 @@
                 android:padding="10dp"
                 android:text="@string/tv_dv2"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -71,8 +71,8 @@
                 android:padding="10dp"
                 android:text="@string/tv_dv3"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -82,29 +82,41 @@
                 android:backgroundTint="@color/teal_700"
                 android:padding="10dp"
                 android:text="@string/tv_dv4"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_border"
+                android:backgroundTint="@color/teal_700"
+                android:padding="10dp"
+                android:text="@string/tv_dv5"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/tv_version"
-                android:textStyle="bold"
-                android:textColor="@color/teal_700"
                 android:textAlignment="center"
-                android:textSize="18sp"/>
+                android:textColor="@color/teal_700"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/tv_derechos"
-                android:textStyle="bold"
-                android:textColor="@color/teal_700"
                 android:textAlignment="center"
-                android:textSize="18sp"/>
+                android:textColor="@color/teal_700"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

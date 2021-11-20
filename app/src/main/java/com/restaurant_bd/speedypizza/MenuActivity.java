@@ -1,17 +1,16 @@
 package com.restaurant_bd.speedypizza;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Services.APIServices;
-
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,10 +73,8 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }

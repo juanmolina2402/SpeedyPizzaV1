@@ -32,9 +32,6 @@
             android:exported="true"
             android:label="@string/itm_about" />
         <activity
-            android:name=".MainContentActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity

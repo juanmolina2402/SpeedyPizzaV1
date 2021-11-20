@@ -1,7 +1,6 @@
 package com.restaurant_bd.speedypizza;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -10,8 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.restaurant_bd.speedypizza.Adapters.MenuDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.restaurant_bd.speedypizza.Models.Categoria;
 import com.restaurant_bd.speedypizza.Services.APIServices;
 import java.util.List;
@@ -71,11 +70,10 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {
-        boolean b = false;
+    public void finish() { //ENVIAR RESPUESTA A ORDER ACTIVITY
         Intent returnIntent = new Intent();
         try {
-            if(MenuDialog.listaTemporal.size() > 0){
+            if(listaTemporal.size() > 0){
                 setResult(RESULT_OK, returnIntent);
             }
         }catch (Exception e){

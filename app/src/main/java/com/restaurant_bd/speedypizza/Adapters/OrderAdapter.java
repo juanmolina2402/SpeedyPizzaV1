@@ -29,26 +29,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         return new OrderAdapter.ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
-        Menu m = menuList.get(position);
-
-        holder.tvNombre.setText(m.getNombre());
-        holder.tvCantidad.setText(m.getCantidad());
-        holder.tvPrecio.setText("$ "+m.getPrecio());
-        holder.llModificar.setOnClickListener(view -> {
-            new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, false);
-        });
-        holder.ivEliminar.setOnClickListener(view -> {
-            new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, true);
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return menuList.size();
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView ivEliminar;
         TextView tvNombre, tvPrecio, tvCantidad;
@@ -62,5 +42,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
             tvCantidad = itemView.findViewById(R.id.tvCantidadP);
             llModificar = itemView.findViewById(R.id.ll_Modificar);
         }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
+        Menu m = menuList.get(position);
+        String p = "$"+m.getPrecio();
+
+        holder.tvNombre.setText(m.getNombre());
+        holder.tvCantidad.setText(m.getCantidad());
+        holder.tvPrecio.setText(p);
+        holder.llModificar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, false));
+        holder.ivEliminar.setOnClickListener(view -> new OrderDialog(context, m.getId(), m.getNombre(), m.getPrecio(), m.getCantidad(), position, true));
+    }
+
+    @Override
+    public int getItemCount() {
+        return menuList.size();
     }
 }

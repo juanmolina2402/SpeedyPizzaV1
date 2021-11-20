@@ -1,15 +1,12 @@
 package com.restaurant_bd.speedypizza;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,12 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         FloatingActionButton btnAcceder  = findViewById(R.id.fab);
-        btnAcceder.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, AddOrderActivity.class));
-        });
+
+        setSupportActionBar(toolbar);
+        btnAcceder.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddOrderActivity.class)));
     }
 
     @Override
@@ -38,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.itm_about) {
             startActivity(new Intent(MainActivity.this, AboutOfActivity.class));
         }else{

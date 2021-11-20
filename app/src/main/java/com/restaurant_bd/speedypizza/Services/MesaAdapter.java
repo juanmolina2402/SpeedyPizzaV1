@@ -35,5 +35,4 @@ public class MesaAdapter {
 
         return API_SERVICE;
     }
-
 }
