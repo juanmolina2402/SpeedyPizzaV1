@@ -3,15 +3,21 @@ package com.restaurant_bd.speedypizza;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Services.APIServices;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,6 +62,23 @@ public class MenuActivity extends AppCompatActivity {
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
                         recyclerView.setAdapter(new MenuAdapter(listaMenu, MenuActivity.this));
+                        recyclerView.getViewTreeObserver().addOnPreDrawListener(
+                            new ViewTreeObserver.OnPreDrawListener() {
+                                @Override
+                                public boolean onPreDraw() {
+                                    recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                                    for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                                        View v = recyclerView.getChildAt(i);
+                                        v.setAlpha(0.0f);
+                                        v.animate().alpha(1.0f)
+                                                .setDuration(300)
+                                                .setStartDelay(i * 50L)
+                                                .start();
+                                    }
+                                    return true;
+                            }
+                       });
                     }
 
                 }catch (Exception e)
