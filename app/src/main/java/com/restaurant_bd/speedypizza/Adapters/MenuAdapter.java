@@ -3,17 +3,21 @@ package com.restaurant_bd.speedypizza.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.restaurant_bd.speedypizza.R;
+
 import com.restaurant_bd.speedypizza.Models.Menu;
+import com.restaurant_bd.speedypizza.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +40,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView ivImagen;
         TextView tvNombre,tvDescripcion, tvPrecio;
-        LinearLayout llmenu;
+        LinearLayout llmenu, ivImagen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,7 +58,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         Menu m = menuList.get(position);
         String p = "$" + m.getPrecio();
 
-        holder.ivImagen.setImageBitmap(convertImage(m.getImagen()));
+        holder.ivImagen.setBackground(convertImage(m.getImagen()));
         holder.tvNombre.setText(m.getNombre());
         holder.tvDescripcion.setText(m.getDescripcion());
         holder.tvPrecio.setText(p);
@@ -67,10 +70,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         return menuList.size();
     }
 
-    private Bitmap convertImage(String imagen){
+    private Drawable convertImage(String imagen){
         String base64String = "data:image/png;base64," + imagen;
         String base64Image = base64String.split(",")[1];
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        Bitmap b = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return new BitmapDrawable(context.getResources(), b);
     }
 }
