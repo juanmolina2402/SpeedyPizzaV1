@@ -4,6 +4,7 @@ import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -16,10 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderDialog;
+import com.restaurant_bd.speedypizza.Models.Detalle_Pedido;
+import com.restaurant_bd.speedypizza.Models.Empleado;
 import com.restaurant_bd.speedypizza.Models.Menu;
 import com.restaurant_bd.speedypizza.Models.Mesa;
+import com.restaurant_bd.speedypizza.Models.Pedido;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
+import com.restaurant_bd.speedypizza.Services.PedidoAdapter;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +54,61 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
 
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
         callMesa.enqueue(getMesasCallback);
+
+
+        ///POST Pedidos
+        Pedido pedido = new Pedido();
+        Detalle_Pedido detalle_pedido = new Detalle_Pedido();
+        ////Usuario usuario = new Usuario("user" , "user");
+        Empleado empleado = new Empleado(1);
+        pedido.setEmpleado(empleado);
+        pedido.setMesa(new Mesa(1));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String salida = df.format(new Date());
+        pedido.setFecha_pedido(salida);
+        pedido.setObservacion("Pedido pendiente");
+        pedido.setEstado("PENDIENTE");
+        pedido.setCliente("Chepe");
+
+        ///LISTA DETALLE PEDIDO
+        ///detalle_pedido.setIDPEDIDO(pedido);
+        detalle_pedido.setMenu(new Menu(5));
+        detalle_pedido.setCantidad(5);
+
+        List<Detalle_Pedido> lstDetallePedidos = new ArrayList<Detalle_Pedido>();
+        lstDetallePedidos.add(detalle_pedido);
+
+        pedido.setDetalle_pedido(lstDetallePedidos);
+
+        Call<Pedido> postPedidos = PedidoAdapter.getApiServicePedido().setPedido(pedido);
+        postPedidos.enqueue(new Callback<Pedido>() {
+            @Override
+            public void onResponse(Call<Pedido> call, Response<Pedido> response) {
+                if(response.isSuccessful()){
+                    Pedido pedido2 = response.body();
+
+                    bt_aceptar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(AddOrderActivity.this, "Se agrego un nuevo pedido", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<Pedido> call, Throwable t) {
+                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
+
 
         ImageView btnAgregar  = findViewById(R.id.btn_agregar);
         btnAgregar.setOnClickListener(v ->

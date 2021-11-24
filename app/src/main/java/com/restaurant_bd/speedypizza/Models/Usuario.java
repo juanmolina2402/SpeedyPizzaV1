@@ -16,8 +16,7 @@ public class Usuario {
     @Expose
     private String password;
 
-    public Usuario(long id, String username, String password) {
-        this.id = id;
+    public Usuario(String username, String password) {
         this.username = username;
         this.password = password;
     }

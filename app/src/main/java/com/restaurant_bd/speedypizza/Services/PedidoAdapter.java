@@ -6,9 +6,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PedidoAdapter {
-    private APIServices.ServicePedidos API_SERVICE;
+    private static APIServices.ServicePedidos API_SERVICE;
 
-    public APIServices.ServicePedidos getApiServiceUsuario(){
+    public static APIServices.ServicePedidos getApiServicePedido(){
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);

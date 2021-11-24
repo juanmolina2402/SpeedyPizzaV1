@@ -38,6 +38,9 @@ public class Menu {
         this.precio = precio;
         this.cantidad = cantidad;
     }
+    public Menu(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;

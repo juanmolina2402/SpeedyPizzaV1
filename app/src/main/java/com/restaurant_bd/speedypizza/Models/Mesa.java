@@ -18,6 +18,18 @@ public class Mesa {
     @Expose
     private String numero;
 
+    public Mesa() {
+        super();
+    }
+
+    public Mesa(Integer id, String numero) {
+        this.id = id;
+        this.numero = numero;
+    }
+    public Mesa(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

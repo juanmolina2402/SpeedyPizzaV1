@@ -22,8 +22,16 @@ public interface APIServices {
 
     APIServices.ServiceMesas serviceMesas();
 
-    //////////////MESAS////////////////////////
-    interface ServiceMesas{
+    APIServices.ServicePedidos servicePedidos();
+
+    APIServices.ServiceEmpleados serviceEmpleados();
+
+    APIServices.ServiceUsuarios serviceUsuarios();
+
+    ///APIServices.ServiceDetallesPedidos serviceDetallesPedidos();
+
+    //////////////SERIVE MESAS////////////////////////
+    public interface ServiceMesas{
 
         @GET("api/mesa")
         Call<List<Mesa>> getMesa();
@@ -31,24 +39,24 @@ public interface APIServices {
         @POST("api/mesa")
         Call<Mesa> setMesa(@Body Mesa mesa);
     }
-    //////////////USUARIOS////////////////////////
-    interface ServiceUsuarios{
-        @GET
+    //////////////SERIVE USUARIOS////////////////////////
+    public interface ServiceUsuarios{
+        @GET("api/usuario")
         Call<List<Usuario>> getUsuario();
     }
 
-    //////////////USUARIOS////////////////////////
-    interface ServiceEmpleados{
-        @GET
+    //////////////SERIVE USUARIOS////////////////////////
+    public interface ServiceEmpleados{
+        @GET("api/empleado")
         Call<List<Empleado>> getEmpleado();
     }
 
-    //////////////PEDIDO////////////////////////
-    interface ServicePedidos{
-        @GET
+    //////////////SERIVE PEDIDO////////////////////////
+    public interface ServicePedidos{
+        @GET("api/pedido")
         Call<List<Pedido>> getPedido();
 
-        @POST
+        @POST("api/pedido")
         Call<Pedido> setPedido(@Body Pedido pedido);
     }
 }

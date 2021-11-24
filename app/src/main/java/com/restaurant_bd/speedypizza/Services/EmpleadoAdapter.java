@@ -7,9 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EmpleadoAdapter {
 
-    private APIServices.ServiceEmpleados API_SERVICE;
+    private static APIServices.ServiceEmpleados API_SERVICE;
 
-    public APIServices.ServiceEmpleados getApiServiceUsuario(){
+    public static APIServices.ServiceEmpleados getApiServiceEmpleados(){
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
