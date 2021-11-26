@@ -22,7 +22,7 @@
         android:id="@+id/tvProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="1dp"
+        android:paddingStart="05dp"
         android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textStyle="bold"

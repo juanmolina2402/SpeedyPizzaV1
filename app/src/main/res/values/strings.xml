@@ -20,7 +20,10 @@
     <string name="btn_eliminar">Eliminar</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="tv_total">Total: $</string>
-    <string name="tv_totaln">0.00</string>
+    <string name="tv_totaln">0.0</string>
+    <string name="menus">Menus</string>
+    <string name="precio">Precio</string>
+    <string name="cant">Cant</string>
 
     //Categorias
     <string name="itm_category">Seleccione categoría</string>

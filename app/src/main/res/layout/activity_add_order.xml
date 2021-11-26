@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +22,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="16dp"
-        android:background="#0B9897"
+        android:background="#D39F3232"
         android:hint="@string/edt_cliente"
         app:startIconDrawable="@drawable/user"
         app:startIconTint="@color/orange"
@@ -32,7 +31,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,19 +39,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
+        android:padding="16dp"
+        android:background="#D39F3232"
+        android:hint="@string/til_selmesa"
         app:startIconDrawable="@drawable/tables"
         app:startIconTint="@color/orange"
-        android:hint="@string/til_selmesa"
-        android:background="#0B9897"
         app:hintTextColor="@color/black">
 
         <AutoCompleteTextView
             android:id="@+id/menu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:inputType="none"
             tools:ignore="LabelFor" />
 
@@ -61,52 +58,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="#0B9897"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/btn_agregar"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="0.3"
-            android:layout_marginEnd="05dp"
-            android:padding="10dp"
-            android:background="#C8892C"
-            android:contentDescription="@string/btn_agregar"
-            android:src="@drawable/add"/>
-
-        <ImageView
-            android:id="@+id/btn_clear"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="0.3"
-            android:layout_marginEnd="05dp"
-            android:padding="10dp"
-            android:background="@color/red"
-            android:src="@drawable/clear"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/btn_aceptar"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="0.3"
-            android:padding="10dp"
-            android:background="#4CAF50"
-            android:src="@drawable/accept"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:gravity="end"
-        android:background="@color/teal_700"
-        android:padding="10dp"
+        android:background="@color/ic_index_background"
+        android:padding="05dp"
         android:orientation="horizontal">
 
         <TextView
@@ -116,7 +70,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="end"
-            android:textSize="25sp"/>
+            android:textSize="23sp"/>
 
         <TextView
             android:id="@+id/tv_total"
@@ -125,13 +79,86 @@
             android:text="@string/tv_totaln"
             android:textColor="@color/white"
             android:gravity="end"
-            android:textSize="25sp"/>
+            android:textSize="23sp"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPedidos"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="05dp"
+        android:paddingBottom="05dp"
+        android:background="@color/black"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/menus"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="@string/precio"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="@string/cant"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:background="#ced4da">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="100dp"
+            android:clipToPadding="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/red"
+            app:menu="@menu/bottom_app_bar"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/add"
+            app:backgroundTint="@color/green"
+            app:tint="@color/white"
+            app:layout_anchor="@id/bottomAppBar"
+            tools:ignore="ContentDescription" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

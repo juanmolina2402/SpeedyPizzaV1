@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.restaurant_bd.speedypizza.AddOrderActivity">
+    <item
+        android:id="@+id/btn_clear"
+        android:icon="@drawable/clear"
+        android:title="@string/btn_eliminar"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+    <item
+        android:id="@+id/btn_aceptar"
+        android:icon="@drawable/accept"
+        android:title="@string/itm_exit"
+        app:showAsAction="always" />
+</menu>

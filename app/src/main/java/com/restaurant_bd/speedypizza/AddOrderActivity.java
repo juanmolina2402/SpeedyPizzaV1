@@ -4,7 +4,9 @@ import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -14,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderAdapter;
 import com.restaurant_bd.speedypizza.Adapters.OrderDialog;
@@ -24,7 +29,6 @@ import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Models.Pedido;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
 import com.restaurant_bd.speedypizza.Services.PedidoAdapter;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,9 +52,15 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_order);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         tvTotal = findViewById(R.id.tv_total);
         rvPedidos = findViewById(R.id.rvPedidos);
+        FloatingActionButton btnAgregar  = findViewById(R.id.fab2);
+        BottomAppBar bar = findViewById(R.id.bottomAppBar);
+
+        btnAgregar.setOnClickListener(v -> startActivityForResult(new Intent(AddOrderActivity.this, CategoryActivity.class), 1));
+        setSupportActionBar(bar);
 
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
         callMesa.enqueue(getMesasCallback);
@@ -104,27 +114,24 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
                 Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_app_bar, menu);
+        return true;
+    }
 
-
-
-
-
-        ImageView btnAgregar  = findViewById(R.id.btn_agregar);
-        btnAgregar.setOnClickListener(v ->
-                startActivityForResult(new Intent(AddOrderActivity.this, CategoryActivity.class), 1)
-        );
-
-        ImageView btnLimpiar  = findViewById(R.id.btn_clear);
-        btnLimpiar.setOnClickListener(v -> {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.btn_clear) {
             clear();
             updateList();
-        });
-
-       /* ImageView btnAceptar  = findViewById(R.id.btn_aceptar);
-        btnAceptar.setOnClickListener(v -> {
+        }else{
             finish();
-        });*/
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private final Callback<List<Mesa>> getMesasCallback = new Callback<List<Mesa>>() {
