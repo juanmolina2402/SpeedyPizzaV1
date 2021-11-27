@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/red"
     tools:context=".AddOrderActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -16,45 +17,50 @@
         app:titleTextColor="@color/white"
         android:minHeight="?attr/actionBarSize"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:background="#D39F3232"
-        android:hint="@string/edt_cliente"
-        app:startIconDrawable="@drawable/user"
-        app:startIconTint="@color/orange"
-        app:endIconMode="clear_text"
-        app:hintTextColor="@color/black">
+        android:background="@drawable/border_style2"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtCliente"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:textColor="@color/black" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:hint="@string/edt_cliente"
+            app:startIconDrawable="@drawable/user"
+            app:startIconTint="@color/orange"
+            app:endIconMode="clear_text"
+            app:hintTextColor="@color/black">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="#D39F3232"
-        android:hint="@string/til_selmesa"
-        app:startIconDrawable="@drawable/tables"
-        app:startIconTint="@color/orange"
-        app:hintTextColor="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtCliente"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/menu"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:inputType="none"
-            tools:ignore="LabelFor" />
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:hint="@string/til_selmesa"
+            app:startIconDrawable="@drawable/tables"
+            app:startIconTint="@color/orange"
+            app:hintTextColor="@color/black">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <AutoCompleteTextView
+                android:id="@+id/menu"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
