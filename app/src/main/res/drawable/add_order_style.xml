@@ -15,6 +15,6 @@
         android:bottom="3dp" >
     </padding>
     <corners
-        android:radius="20dp">
+        android:radius="19dp">
     </corners>
 </shape>
