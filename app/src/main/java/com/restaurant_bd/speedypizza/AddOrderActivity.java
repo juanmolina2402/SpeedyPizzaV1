@@ -1,17 +1,18 @@
 package com.restaurant_bd.speedypizza;
 
 import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,23 +30,24 @@ import com.restaurant_bd.speedypizza.Models.Mesa;
 import com.restaurant_bd.speedypizza.Models.Pedido;
 import com.restaurant_bd.speedypizza.Services.MesaAdapter;
 import com.restaurant_bd.speedypizza.Services.PedidoAdapter;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddOrderActivity extends AppCompatActivity implements OrderDialog.RefreshList{
-    private List<Mesa> listaMesa;
     private List<Menu> listaMenu;
     private Mesa mSelected;
-    private AutoCompleteTextView tvMesa;
-    private ImageView bt_aceptar;
     private RecyclerView rvPedidos;
     private TextView tvTotal;
+    private EditText edtCliente;
+    private int mesa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
+        edtCliente = findViewById(R.id.edtCliente);
         tvTotal = findViewById(R.id.tv_total);
         rvPedidos = findViewById(R.id.rvPedidos);
         FloatingActionButton btnAgregar  = findViewById(R.id.fab2);
@@ -64,56 +67,6 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
 
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
         callMesa.enqueue(getMesasCallback);
-
-
-        ///POST Pedidos
-        Pedido pedido = new Pedido();
-        Detalle_Pedido detalle_pedido = new Detalle_Pedido();
-        ////Usuario usuario = new Usuario("user" , "user");
-        Empleado empleado = new Empleado(1);
-        pedido.setEmpleado(empleado);
-        pedido.setMesa(new Mesa(1));
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String salida = df.format(new Date());
-        pedido.setFecha_pedido(salida);
-        pedido.setObservacion("Pedido pendiente");
-        pedido.setEstado("PENDIENTE");
-        pedido.setCliente("Chepe");
-
-        ///LISTA DETALLE PEDIDO
-        ///detalle_pedido.setIDPEDIDO(pedido);
-        detalle_pedido.setMenu(new Menu(5));
-        detalle_pedido.setCantidad(5);
-
-        List<Detalle_Pedido> lstDetallePedidos = new ArrayList<Detalle_Pedido>();
-        lstDetallePedidos.add(detalle_pedido);
-
-        pedido.setDetalle_pedido(lstDetallePedidos);
-
-        Call<Pedido> postPedidos = PedidoAdapter.getApiServicePedido().setPedido(pedido);
-        postPedidos.enqueue(new Callback<Pedido>() {
-            @Override
-            public void onResponse(Call<Pedido> call, Response<Pedido> response) {
-                if(response.isSuccessful()){
-                    Pedido pedido2 = response.body();
-
-                    bt_aceptar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(AddOrderActivity.this, "Se agrego un nuevo pedido", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
-
-            }
-            @Override
-            public void onFailure(Call<Pedido> call, Throwable t) {
-                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override
@@ -129,7 +82,12 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
             clear();
             updateList();
         }else{
-            finish();
+            if(!edtCliente.getText().toString().isEmpty()){
+                Aceptar();
+                finish();
+            }else{
+                Toast.makeText(AddOrderActivity.this, "Campos vacìos", Toast.LENGTH_LONG).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -138,15 +96,15 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         @Override
         public void onResponse(@NonNull Call<List<Mesa>> call, Response<List<Mesa>> response) {
             if(response.isSuccessful()){
-                listaMesa = response.body();
+                List<Mesa> listaMesa = response.body();
                 ArrayAdapter<Mesa> adapter = new ArrayAdapter<>(AddOrderActivity.this, android.R.layout.simple_dropdown_item_1line, listaMesa);
-                tvMesa = findViewById(R.id.menu);
+                AutoCompleteTextView tvMesa = findViewById(R.id.menu);
                 tvMesa.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
                 tvMesa.setOnItemClickListener((arg0, arg1, arg2, arg3) -> {
                     mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
-                    Toast.makeText(AddOrderActivity.this, "Clicked " + arg2 + " codigo: " + mSelected.getId(), Toast.LENGTH_SHORT).show();
+                    mesa = mSelected.getId();
                 });
             }else{
                 Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
@@ -158,6 +116,49 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
             Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    public void Aceptar(){
+        ///POST Pedidos
+        Pedido pedido = new Pedido();
+
+        ////Usuario usuario = new Usuario("user" , "user");
+        Empleado empleado = new Empleado(1);
+        pedido.setEmpleado(empleado);
+        pedido.setMesa(new Mesa(mesa));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String salida = df.format(new Date());
+        pedido.setFecha_pedido(salida);
+        pedido.setObservacion("");
+        pedido.setEstado("PENDIENTE");
+        pedido.setCliente(edtCliente.getText().toString());
+
+        List<Detalle_Pedido> lstDetallePedidos = new ArrayList<>();
+        for (Menu m : listaTemporal) {
+            Detalle_Pedido detalle_pedido = new Detalle_Pedido();
+            detalle_pedido.setMenu(new Menu(m.getId()));
+            detalle_pedido.setCantidad(Long.parseLong(m.getCantidad()));
+            lstDetallePedidos.add(detalle_pedido);
+        }
+
+        pedido.setDetalle_pedido(lstDetallePedidos);
+
+        Call<Pedido> postPedidos = PedidoAdapter.getApiServicePedido().setPedido(pedido);
+        postPedidos.enqueue(new Callback<Pedido>() {
+            @Override
+            public void onResponse(@NonNull Call<Pedido> call, @NonNull Response<Pedido> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(AddOrderActivity.this, "Se agregó un nuevo pedido", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Pedido> call, @NonNull Throwable t) {
+                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     private void loadData(){ //ASIGNAR DATOS DE LA LISTA TEMPORAL
         listaMenu = listaTemporal;

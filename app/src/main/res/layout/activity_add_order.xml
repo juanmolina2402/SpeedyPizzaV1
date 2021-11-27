@@ -30,6 +30,7 @@
         app:hintTextColor="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtCliente"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:textColor="@color/black" />
