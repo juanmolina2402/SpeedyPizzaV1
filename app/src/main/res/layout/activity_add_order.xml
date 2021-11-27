@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_style2"
+        android:background="@drawable/add_order_style"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -30,16 +30,20 @@
             android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:hint="@string/edt_cliente"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="?attr/colorOnPrimary"
             app:startIconDrawable="@drawable/user"
-            app:startIconTint="@color/orange"
+            app:startIconTint="@color/white"
             app:endIconMode="clear_text"
-            app:hintTextColor="@color/black">
+            app:endIconTint="@color/white"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtCliente"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:textColor="@color/black" />
+                android:background="@android:color/transparent"
+                android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,15 +52,20 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:hint="@string/til_selmesa"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="?attr/colorOnPrimary"
             app:startIconDrawable="@drawable/tables"
-            app:startIconTint="@color/orange"
-            app:hintTextColor="@color/black">
+            app:startIconTint="@color/white"
+            app:endIconTint="@color/white"
+            app:hintTextColor="@color/white">
 
             <AutoCompleteTextView
                 android:id="@+id/menu"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:inputType="none"
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="@color/white"
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -160,11 +169,11 @@
             android:id="@+id/fab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/add"
             app:backgroundTint="@color/green"
-            app:tint="@color/white"
             app:layout_anchor="@id/bottomAppBar"
-            tools:ignore="ContentDescription" />
+            app:srcCompat="@drawable/add"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
