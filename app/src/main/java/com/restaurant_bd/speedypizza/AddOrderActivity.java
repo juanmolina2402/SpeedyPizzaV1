@@ -3,7 +3,6 @@ package com.restaurant_bd.speedypizza;
 import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -83,21 +82,15 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
 
         if(b){
             builder.setMessage("¿Desea eliminar toda la lista de menus?");
-            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    clear();
-                    updateList();
-                }
+            builder.setPositiveButton("Aceptar", (dialog, which) -> {
+                clear();
+                updateList();
             });
         }else{
             builder.setMessage("¿Desea enviar el pedido?");
-            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Aceptar();
-                    finish();
-                }
+            builder.setPositiveButton("Aceptar", (dialog, which) -> {
+                Aceptar();
+                finish();
             });
         }
         builder.setNegativeButton("Cancelar",null );
