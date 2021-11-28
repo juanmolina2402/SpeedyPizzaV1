@@ -82,7 +82,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
             clear();
             updateList();
         }else{
-            if(!edtCliente.getText().toString().isEmpty()){
+            if(!edtCliente.getText().toString().isEmpty() && listaTemporal != null && !listaTemporal.isEmpty()){
                 Aceptar();
                 finish();
             }else{
