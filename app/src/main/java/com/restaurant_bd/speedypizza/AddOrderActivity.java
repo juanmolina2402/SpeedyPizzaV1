@@ -2,6 +2,8 @@ package com.restaurant_bd.speedypizza;
 
 import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -75,16 +77,44 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         return true;
     }
 
+    private void alertDialog(boolean b){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddOrderActivity.this);
+        builder.setTitle("Confirmación");
+
+        if(b){
+            builder.setMessage("¿Desea eliminar toda la lista de menus?");
+            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    clear();
+                    updateList();
+                }
+            });
+        }else{
+            builder.setMessage("¿Desea enviar el pedido?");
+            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Aceptar();
+                    finish();
+                }
+            });
+        }
+        builder.setNegativeButton("Cancelar",null );
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.btn_clear) {
-            clear();
-            updateList();
+            if(listaTemporal != null && !listaTemporal.isEmpty()){
+                alertDialog(true);
+            }
         }else{
             if(!edtCliente.getText().toString().isEmpty() && listaTemporal != null && !listaTemporal.isEmpty()){
-                Aceptar();
-                finish();
+                alertDialog(false);
             }else{
                 Toast.makeText(AddOrderActivity.this, "Campos vacìos", Toast.LENGTH_LONG).show();
             }
@@ -155,7 +185,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
             }
             @Override
             public void onFailure(@NonNull Call<Pedido> call, @NonNull Throwable t) {
-                Toast.makeText(AddOrderActivity.this, "" + t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(AddOrderActivity.this, "Error, por favor comuniquese con el soporte", Toast.LENGTH_LONG).show();
             }
         });
     }
