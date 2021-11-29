@@ -10,6 +10,8 @@
     <string name="itm_about">Acerca de</string>
     <string name="itm_exit">Cerrar sesión</string>
     <string name="fab">Agregar orden</string>
+    <string name="btn_entregar">Entregar</string>
+    <string name="btn_anular">Anular</string>
 
     //Agregar orden
     <string name="tbaddorder">Agregar orden</string>
@@ -33,6 +35,8 @@
     <string name="itm_dialog_title">¿Agregar menu?</string>
     <string name="itm_dialog_title2">¿Eliminar menu?</string>
     <string name="itm_dialog_title3">¿Modificar cantidad?</string>
+    <string name="itm_dialog_title4">¿Entregar pedido?</string>
+    <string name="itm_dialog_title5">¿Anular pedido?</string>
     <string name="itm_cantidad2">Digite cantidad</string>
     <string name="btnCancelar">Cancelar</string>
 

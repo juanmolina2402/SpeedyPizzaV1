@@ -217,7 +217,15 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
     }
 
     @Override
-    public void finish() { //AL SALIR, ME RESETEE TODOS LOS VALORES
+    public void finish() { //ENVIAR RESPUESTA A MAIN ACTIVITY
+        Intent returnIntent = new Intent();
+        try {
+            if(listaTemporal.size() > 0){
+                setResult(RESULT_OK, returnIntent);
+            }
+        }catch (Exception e){
+            setResult(RESULT_CANCELED, returnIntent);
+        }
         clear();
         super.finish();
     }
