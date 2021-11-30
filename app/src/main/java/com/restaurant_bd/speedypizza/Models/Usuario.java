@@ -21,6 +21,10 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario() {
+        super();
+    }
+
     public long getId() {
         return id;
     }

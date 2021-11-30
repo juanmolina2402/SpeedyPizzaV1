@@ -4,6 +4,7 @@ import static com.restaurant_bd.speedypizza.Adapters.MenuAdapter.listaTemporal;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -49,6 +50,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
     private TextView tvTotal;
     private EditText edtCliente;
     private int mesa;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +147,9 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         Pedido pedido = new Pedido();
 
         ////Usuario usuario = new Usuario("user" , "user");
-        Empleado empleado = new Empleado(1);
+        this.sharedPreferences = getSharedPreferences(LoginActivity.ID_EMPLOYEE, MODE_PRIVATE);
+
+        Empleado empleado = new Empleado(Long.parseLong(sharedPreferences.getString("id_employee", "0")));
         pedido.setEmpleado(empleado);
         pedido.setMesa(new Mesa(mesa));
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");

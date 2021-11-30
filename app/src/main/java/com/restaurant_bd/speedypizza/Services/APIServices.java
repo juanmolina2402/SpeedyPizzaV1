@@ -46,14 +46,19 @@ public interface APIServices {
     public interface ServiceUsuarios{
         @GET("api/usuario")
         Call<List<Usuario>> getUsuario();
+
+        @POST("api/usuario/login")
+        Call<Usuario> getUserLogin(@Body Usuario usuario);
     }
 
-    //////////////SERIVE USUARIOS////////////////////////
+    //////////////SERIVE EMPLEADOS////////////////////////
     public interface ServiceEmpleados{
         @GET("api/empleado")
         Call<List<Empleado>> getEmpleado();
-    }
 
+        @GET("api/empleado/{id}")
+        Call<Empleado> getEmpleadoForLogin(@Path("id") Long id);
+    }
     //////////////SERIVE PEDIDO////////////////////////
     public interface ServicePedidos{
         @GET("api/pedido")
