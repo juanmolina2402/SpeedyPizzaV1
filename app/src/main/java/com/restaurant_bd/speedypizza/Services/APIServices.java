@@ -17,24 +17,20 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface APIServices {
-    @GET("api/categoria")
-    Call<List<Categoria>> getCategoria();
 
-    @GET("api/menu/categoria/{id}")
-    Call<List<Menu>> getMenu(@Path("id") long id);
-
-    APIServices.ServiceMesas serviceMesas();
-
-    APIServices.ServicePedidos servicePedidos();
-
-    APIServices.ServiceEmpleados serviceEmpleados();
-
-    APIServices.ServiceUsuarios serviceUsuarios();
-
-    ///APIServices.ServiceDetallesPedidos serviceDetallesPedidos();
+    //////////////SERIVE CATEGORIAS////////////////////////
+    interface ServiceCategorias{
+        @GET("api/categoria")
+        Call<List<Categoria>> getCategoria();
+    }
+    //////////////SERIVE MENUS////////////////////////
+    interface ServiceMenus{
+        @GET("api/menu/categoria/{id}")
+        Call<List<Menu>> getMenu(@Path("id") long id);
+    }
 
     //////////////SERIVE MESAS////////////////////////
-    public interface ServiceMesas{
+    interface ServiceMesas{
 
         @GET("api/mesa")
         Call<List<Mesa>> getMesa();
@@ -43,7 +39,7 @@ public interface APIServices {
         Call<Mesa> setMesa(@Body Mesa mesa);
     }
     //////////////SERIVE USUARIOS////////////////////////
-    public interface ServiceUsuarios{
+    interface ServiceUsuarios{
         @GET("api/usuario")
         Call<List<Usuario>> getUsuario();
 
@@ -52,7 +48,7 @@ public interface APIServices {
     }
 
     //////////////SERIVE EMPLEADOS////////////////////////
-    public interface ServiceEmpleados{
+    interface ServiceEmpleados{
         @GET("api/empleado")
         Call<List<Empleado>> getEmpleado();
 
@@ -60,7 +56,7 @@ public interface APIServices {
         Call<Empleado> getEmpleadoForLogin(@Path("id") Long id);
     }
     //////////////SERIVE PEDIDO////////////////////////
-    public interface ServicePedidos{
+    interface ServicePedidos{
         @GET("api/pedido")
         Call<List<Pedido>> getPedido();
 

@@ -43,14 +43,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddOrderActivity extends AppCompatActivity implements OrderDialog.RefreshList{
+public class AddOrderActivity extends AppCompatActivity implements OrderDialog.RefreshList {
     private List<Menu> listaMenu;
     private Mesa mSelected;
     private RecyclerView rvPedidos;
     private TextView tvTotal;
     private EditText edtCliente;
     private int mesa;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +61,13 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         edtCliente = findViewById(R.id.edtCliente);
         tvTotal = findViewById(R.id.tv_total);
         rvPedidos = findViewById(R.id.rvPedidos);
-        FloatingActionButton btnAgregar  = findViewById(R.id.fab2);
+        FloatingActionButton btnAgregar = findViewById(R.id.fab2);
         BottomAppBar bar = findViewById(R.id.bottomAppBar);
 
         btnAgregar.setOnClickListener(v -> startActivityForResult(new Intent(AddOrderActivity.this, CategoryActivity.class), 1));
         setSupportActionBar(bar);
 
+        ///Haciendo la llamada del endpoint Get Mesa
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
         callMesa.enqueue(getMesasCallback);
     }
@@ -78,24 +78,24 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         return true;
     }
 
-    private void alertDialog(boolean b){
+    private void alertDialog(boolean b) {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddOrderActivity.this);
         builder.setTitle("Confirmación");
 
-        if(b){
+        if (b) {
             builder.setMessage("¿Desea eliminar toda la lista de menus?");
             builder.setPositiveButton("Aceptar", (dialog, which) -> {
                 clear();
                 updateList();
             });
-        }else{
+        } else {
             builder.setMessage("¿Desea enviar el pedido?");
             builder.setPositiveButton("Aceptar", (dialog, which) -> {
                 Aceptar();
                 finish();
             });
         }
-        builder.setNegativeButton("Cancelar",null );
+        builder.setNegativeButton("Cancelar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -104,23 +104,24 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.btn_clear) {
-            if(listaTemporal != null && !listaTemporal.isEmpty()){
+            if (listaTemporal != null && !listaTemporal.isEmpty()) {
                 alertDialog(true);
             }
-        }else{
-            if(!edtCliente.getText().toString().isEmpty() && listaTemporal != null && !listaTemporal.isEmpty()){
+        } else {
+            if (!edtCliente.getText().toString().isEmpty() && listaTemporal != null && !listaTemporal.isEmpty()) {
                 alertDialog(false);
-            }else{
+            } else {
                 Toast.makeText(AddOrderActivity.this, "Campos vacìos", Toast.LENGTH_LONG).show();
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
+    ///Obteniendo numero de mesa del endpoint
     private final Callback<List<Mesa>> getMesasCallback = new Callback<List<Mesa>>() {
         @Override
         public void onResponse(@NonNull Call<List<Mesa>> call, Response<List<Mesa>> response) {
-            if(response.isSuccessful()){
+            if (response.isSuccessful()) {
                 List<Mesa> listaMesa = response.body();
                 ArrayAdapter<Mesa> adapter = new ArrayAdapter<>(AddOrderActivity.this, android.R.layout.simple_dropdown_item_1line, listaMesa);
                 AutoCompleteTextView tvMesa = findViewById(R.id.menu);
@@ -131,7 +132,7 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
                     mSelected = (Mesa) arg0.getAdapter().getItem(arg2);
                     mesa = mSelected.getId();
                 });
-            }else{
+            } else {
                 Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
             }
         }
@@ -142,12 +143,12 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         }
     };
 
-    public void Aceptar(){
+    public void Aceptar() {
         ///POST Pedidos
         Pedido pedido = new Pedido();
 
         ////Usuario usuario = new Usuario("user" , "user");
-        this.sharedPreferences = getSharedPreferences(LoginActivity.ID_EMPLOYEE, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.ID_EMPLOYEE, MODE_PRIVATE);
 
         Empleado empleado = new Empleado(Long.parseLong(sharedPreferences.getString("id_employee", "0")));
         pedido.setEmpleado(empleado);
@@ -169,23 +170,27 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
 
         pedido.setDetalle_pedido(lstDetallePedidos);
 
+        ///Haciendo la llamada del endpoint postPedido
         Call<Pedido> postPedidos = PedidoAdapter.getApiServicePedido().setPedido(pedido);
-        postPedidos.enqueue(new Callback<Pedido>() {
-            @Override
-            public void onResponse(@NonNull Call<Pedido> call, @NonNull Response<Pedido> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(AddOrderActivity.this, "Se agregó un nuevo pedido", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<Pedido> call, @NonNull Throwable t) {
-                //Toast.makeText(AddOrderActivity.this, "Error, por favor comuniquese con el soporte", Toast.LENGTH_LONG).show();
-            }
-        });
+        postPedidos.enqueue(postPedidoOrder);
     }
+
+    ///Variable que se le asigna el post Pedido de la orden
+    private final Callback<Pedido> postPedidoOrder = new Callback<Pedido>() {
+        @Override
+        public void onResponse(@NonNull Call<Pedido> call, @NonNull Response<Pedido> response) {
+            if (response.isSuccessful()) {
+                Toast.makeText(AddOrderActivity.this, "Se agregó un nuevo pedido", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(AddOrderActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        public void onFailure(@NonNull Call<Pedido> call, @NonNull Throwable t) {
+            //Toast.makeText(AddOrderActivity.this, "Error, por favor comuniquese con el soporte", Toast.LENGTH_LONG).show();
+        }
+    };
 
     private void loadData(){ //ASIGNAR DATOS DE LA LISTA TEMPORAL
         listaMenu = listaTemporal;

@@ -1,6 +1,7 @@
 package com.restaurant_bd.speedypizza;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -89,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements PedidoDialog.Upda
                     Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<List<Pedido>> call, @NonNull Throwable t) {
 
@@ -106,12 +106,16 @@ public class MainActivity extends AppCompatActivity implements PedidoDialog.Upda
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.ID_EMPLOYEE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         if (id == R.id.itm_update) {
             llamarPedidos();
         }else if (id == R.id.itm_about) {
             startActivity(new Intent(MainActivity.this, AboutOfActivity.class));
         }else{
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            editor.putString("id_employee", "");
+            editor.apply();
             finish();
         }
         return super.onOptionsItemSelected(item);

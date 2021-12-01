@@ -14,18 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.restaurant_bd.speedypizza.Adapters.MenuAdapter;
 import com.restaurant_bd.speedypizza.Models.Menu;
-import com.restaurant_bd.speedypizza.Services.APIServices;
+import com.restaurant_bd.speedypizza.Services.MenuAdapterAPI;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MenuActivity extends AppCompatActivity {
-    private final String baseUrl = "https://restaurant-bd.herokuapp.com/";
+
     private List<Menu> listaMenu;
     private String id;
 
@@ -45,15 +43,10 @@ public class MenuActivity extends AppCompatActivity {
 
     public void buscar ()
     {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        APIServices menuService = retrofit.create(APIServices.class);
-        Call<List<Menu>> lista = menuService.getMenu(Integer.parseInt(id));
+        Call<List<Menu>> lista = MenuAdapterAPI.getApiServiceMenus().getMenu(Integer.parseInt(id));
         lista.enqueue(new Callback<List<Menu>>() {
             @Override
-            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
+            public void onResponse(@NonNull Call<List<Menu>> call, @NonNull Response<List<Menu>> response) {
                 try {
                     if(response.isSuccessful())
                     {
@@ -88,7 +81,7 @@ public class MenuActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Menu>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Menu>> call, @NonNull Throwable t) {
 
             }
         });
