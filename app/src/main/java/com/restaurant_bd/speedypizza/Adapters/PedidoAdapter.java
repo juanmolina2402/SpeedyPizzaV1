@@ -45,12 +45,15 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull PedidoAdapter.ViewHolder holder, int position) {
         Pedido p = pedidoList.get(position);
-        String e = p.getEmpleado().getNombres() + " " + p.getEmpleado().getApellidos();
+        String e = "Atendido por: " + p.getEmpleado().getNombres() + " " + p.getEmpleado().getApellidos();
+        String c = "Cliente: " + p.getCliente();
+        String m = "Mesa " + p.getMesa().getCodigo();
+        String est = "Estado: " + p.getEstado();
 
         holder.tvEmpleado.setText(e);
-        holder.tvCliente.setText(p.getCliente());
-        holder.tvMesa.setText(p.getMesa().getCodigo());
-        holder.tvEstado.setText(p.getEstado());
+        holder.tvCliente.setText(c);
+        holder.tvMesa.setText(m);
+        holder.tvEstado.setText(est);
         holder.llpedidos.setOnClickListener(view -> new PedidoDialog(context, p.getId(), p.getCliente(), p.getEstado()));
     }
 

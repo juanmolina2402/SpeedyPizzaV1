@@ -64,6 +64,7 @@
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:inputType="textPassword"
                 android:background="@android:color/transparent"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
