@@ -35,6 +35,7 @@
             android:layout_height="128dp"
             android:paddingLeft="45dp"
             android:paddingRight="45dp"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:text="@string/app_name"/>
