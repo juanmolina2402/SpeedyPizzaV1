@@ -71,6 +71,32 @@ public class AddOrderActivity extends AppCompatActivity implements OrderDialog.R
         Call<List<Mesa>> callMesa = MesaAdapter.getApiServiceMesa().getMesa();
         callMesa.enqueue(getMesasCallback);
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isDestroyed();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

@@ -48,6 +48,32 @@ public class MainActivity extends AppCompatActivity implements PedidoDialog.Upda
         llamarPedidos();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
     public void llamarPedidos(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())

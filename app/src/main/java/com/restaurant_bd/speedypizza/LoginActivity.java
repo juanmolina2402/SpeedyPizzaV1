@@ -47,6 +47,36 @@ public class LoginActivity extends AppCompatActivity {
             getUsuarioForLogin.enqueue(getUsuarioPorLogin);
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ed_username.setText("");
+        ed_password.setText("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isDestroyed();
+    }
+
     ///Variable que se le asigna la respuesta de la solicitud
     private final Callback<Usuario> getUsuarioPorLogin = new Callback<Usuario>() {
         @Override
