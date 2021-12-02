@@ -42,8 +42,9 @@
                 android:id="@+id/edtCliente"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
+                android:maxLength="40"
                 android:background="@android:color/transparent"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

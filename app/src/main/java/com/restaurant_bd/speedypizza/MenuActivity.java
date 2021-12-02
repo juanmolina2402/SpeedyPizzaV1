@@ -81,9 +81,7 @@ public class MenuActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Menu>> call, @NonNull Throwable t) {
-
-            }
+            public void onFailure(@NonNull Call<List<Menu>> call, @NonNull Throwable t) { }
         });
     }
 

@@ -39,6 +39,7 @@
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3"
+        android:minHeight="48dp"
         android:padding="10dp"
         android:textSize="19sp"
         tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />

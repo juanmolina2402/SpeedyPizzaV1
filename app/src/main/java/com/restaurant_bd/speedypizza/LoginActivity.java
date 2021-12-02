@@ -1,7 +1,5 @@
 package com.restaurant_bd.speedypizza;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -9,6 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.restaurant_bd.speedypizza.Models.Empleado;
 import com.restaurant_bd.speedypizza.Models.Usuario;
@@ -37,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         btnlogin.setOnClickListener(v -> {
-
             /////////////////////LOGIN USUARIO//////////////////////////////////////
             Usuario usuario = new Usuario();
             usuario.setUsername(ed_username.getText().toString());
@@ -54,13 +54,10 @@ public class LoginActivity extends AppCompatActivity {
             if (response.isSuccessful()) {
                 Usuario usuarioAux = response.body();
                 long id_usuario = usuarioAux.getId();
-                Toast.makeText(LoginActivity.this, "Usuario correcto", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                 ///Obteniendo el empleado según el id del usuario
                 Call<Empleado> getEmpleadoForId = EmpleadoAdapter.getApiServiceEmpleados().getEmpleadoForLogin(id_usuario);
                 getEmpleadoForId.enqueue(getEmpleadoPorLogin);
-                finish();
             } else {
                 Toast.makeText(LoginActivity.this, "Error: " + response.code(), Toast.LENGTH_LONG).show();
             }
@@ -83,8 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     editorConfig.putString("id_employee", String.valueOf(empleadoAux.getId()));
                     editorConfig.apply();
-                    Toast.makeText(LoginActivity.this, "Se agregó el empleado", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(LoginActivity.this, "Bienvenido " + empleadoAux.getNombres(), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
             }
             else{
                 Toast.makeText(LoginActivity.this, "Ocurrió un error", Toast.LENGTH_LONG).show();
