@@ -29,4 +29,3 @@ public class CategoriaAdapter {
         return API_SERVICE;
     }
 }
-    
